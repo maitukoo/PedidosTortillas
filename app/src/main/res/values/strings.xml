@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">PedidosTortillas</string>
+    <string name="Nombre">Nombre:</string>
+    <string name="IntNombre">Introduce tu nombre</string>
+    <string name="Direccion">Dirección:</string>
+    <string name="Telefono">Telefono:</string>
+    <string name="IntTelefono">Introduce tu teléfono</string>
+    <string name="IntDireccion">Introduce tu dirección</string>
+    <string name="Titulo">Pide Tortillas!</string>
+    <string name="Salir">Salir</string>
+    <string name="Siguiente">Siguiente</string>
 </resources>
