@@ -10,15 +10,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * Created by Hibryd on 08/12/2016.
+ * Created by adminportatil on 09/12/2016.
  */
 
-public class AdaptadorTortillas extends ArrayAdapter<String> {
+public class AdaptadorBebidas extends ArrayAdapter<String> {
 
     private final Activity context;
     private final String[] nombres;
     private final Integer[] imageId;
-    public AdaptadorTortillas (Activity context,String[] nombres,Integer[] imageId){
+    public AdaptadorBebidas (Activity context,String[] nombres,Integer[] imageId){
         super(context, R.layout.spinnerrow,nombres);
         this.context = context;
         this.nombres = nombres;
@@ -27,7 +27,7 @@ public class AdaptadorTortillas extends ArrayAdapter<String> {
     }
 
     @Override
-    public View getDropDownView(int position, View convertView,ViewGroup parent) {
+    public View getDropDownView(int position, View convertView, ViewGroup parent) {
         return getCustomView(position, convertView, parent);
     }
 
