@@ -1,6 +1,7 @@
 package com.example.hibryd.pedidostortillas;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,15 +27,27 @@ public class AdaptadorTortillas extends ArrayAdapter<String> {
     }
 
     @Override
-    public View getView (int position , View view, ViewGroup parent){
-        LayoutInflater inflater = context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.spinnerrow, null, true);
-        TextView txtNombreBebida = (TextView) rowView.findViewById(R.id.NombreBebida);
-        ImageView imagen = (ImageView) rowView.findViewById(R.id.icon);
-        txtNombreBebida.setText(web[position]);
-        imagen.setImageResource(imageId[position]);
-        return rowView;
+    public View getDropDownView(int position, View convertView,ViewGroup parent) {
+        return getCustomView(position, convertView, parent);
+    }
 
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        return getCustomView(position, convertView, parent);
+    }
+
+    public View getCustomView(int position, View convertView, ViewGroup parent) {
+
+        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View row = inflater.inflate(R.layout.spinnerrow, parent, false);
+
+        TextView textView = (TextView) row.findViewById(R.id.NombreBebida);
+        textView.setText(web[position]);
+
+        ImageView imageView = (ImageView)row.findViewById(R.id.icon);
+        imageView.setImageResource(imageId[position]);
+
+        return row;
     }
 
 }
