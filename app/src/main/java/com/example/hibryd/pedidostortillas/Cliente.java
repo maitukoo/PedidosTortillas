@@ -1,10 +1,12 @@
 package com.example.hibryd.pedidostortillas;
 
+import java.io.Serializable;
+
 /**
  * Created by Hibryd on 06/12/2016.
  */
 
-public class Cliente {
+public class Cliente implements Serializable {
     private String nombre;
     private String direccion;
     private String telefono;

@@ -7,9 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     Button siguiente;
-    private Datos[] arrayParametros = new Datos[3];
+    private ArrayList<Datos> arrayParametros = new ArrayList<Datos>();
     private Cliente cliente;
     private EditText nombre;
     private EditText direccion;
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         cliente.setTelefono(c);
         objeto.setIdentificador("cliente");
         objeto.setX(cliente);
-        arrayParametros[0] = objeto;
+        arrayParametros.add(objeto);
         intent.putExtra("array",arrayParametros);
         startActivity(intent);
     }
