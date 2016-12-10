@@ -21,25 +21,33 @@ import java.util.ArrayList;
 
 public class EligeTortilla extends AppCompatActivity {
 
-    String[] nombre = {"Tortilla","Kas"};
+    String[] nombre = {"Coca-Cola","Kas"};
     Integer[] imageId = {R.drawable.cola,R.drawable.kas};
     private ArrayList<Datos> arrayParametros = new ArrayList<Datos>();
     private Cliente cliente;
+    private TextView saludo;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.eligetortilla);
+        saludo = (TextView) findViewById(R.id.Saludo);
         Bundle bnd = getIntent().getExtras();
         arrayParametros = (ArrayList<Datos>) bnd.getSerializable("array");
+        cliente = (Cliente)arrayParametros.get(0).getX();
+        Saludar();
         String s = arrayParametros.get(0).getIdentificador();
         Log.e("tu madre",s);
-        cliente = (Cliente)arrayParametros.get(0).getX();
         Log.e("joder", cliente.getNombre());
 
 
         Spinner mySpinner = (Spinner)findViewById(R.id.spinner);
         AdaptadorTortillas adapter = new AdaptadorTortillas(this,nombre,imageId);
         mySpinner.setAdapter(adapter);
+    }
+    public void Saludar(){
+        String nombre;
+        nombre = cliente.getNombre();
+        saludo.setText("Buenas " + nombre + ", que deseas para tu pedido");
     }
 }
