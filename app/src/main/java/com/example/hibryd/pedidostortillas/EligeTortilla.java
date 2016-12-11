@@ -26,6 +26,8 @@ public class EligeTortilla extends AppCompatActivity {
     private ArrayList<Datos> arrayParametros = new ArrayList<Datos>();
     private Cliente cliente;
     private TextView saludo;
+    private Spinner comboTamanio;
+    private Spinner comboTipoHuevo;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,17 +39,24 @@ public class EligeTortilla extends AppCompatActivity {
         cliente = (Cliente)arrayParametros.get(0).getX();
         Saludar();
         String s = arrayParametros.get(0).getIdentificador();
-        Log.e("tu madre",s);
-        Log.e("joder", cliente.getNombre());
 
+        comboTamanio = (Spinner) findViewById(R.id.cmbTamanio);
+        ArrayAdapter<CharSequence> adaptadorTamanio = ArrayAdapter.createFromResource(this,R.array.Tamanios,android.R.layout.simple_spinner_item);
+        adaptadorTamanio.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        comboTamanio.setAdapter(adaptadorTamanio);
 
-        Spinner mySpinner = (Spinner)findViewById(R.id.spinner);
+        comboTipoHuevo = (Spinner) findViewById(R.id.cmbTipoHuevo);
+        ArrayAdapter<CharSequence> adaptadorTipoHuevo = ArrayAdapter.createFromResource(this,R.array.TipoHuevos,android.R.layout.simple_spinner_item);
+        adaptadorTipoHuevo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        comboTipoHuevo.setAdapter(adaptadorTipoHuevo);
+
+        Spinner spinnerTortillas = (Spinner)findViewById(R.id.cmbTipoTortilla);
         AdaptadorTortillas adapter = new AdaptadorTortillas(this,nombre,imageId);
-        mySpinner.setAdapter(adapter);
+        spinnerTortillas.setAdapter(adapter);
     }
     public void Saludar(){
         String nombre;
         nombre = cliente.getNombre();
-        saludo.setText("Buenas " + nombre + ", que deseas para tu pedido");
+        saludo.setText("Buenas " + nombre + ", que deseas para tu pedido?");
     }
 }

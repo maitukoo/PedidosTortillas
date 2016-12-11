@@ -9,4 +9,17 @@
     <string name="Titulo">Pide Tortillas!</string>
     <string name="Salir">Salir</string>
     <string name="Siguiente">Siguiente</string>
+    <string name="aniadir">Añadir</string>
+    <string name="cantidad">Cantidad:</string>
+
+    <string-array name ="Tamanios">
+        <item>Individual</item>
+        <item>Familiar</item>
+    </string-array>
+
+    <string-array name="TipoHuevos">
+        <item>Granja</item>
+        <item>Campero</item>
+        <item>Ecologico</item>
+    </string-array>
 </resources>

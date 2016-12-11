@@ -10,7 +10,7 @@ import android.widget.EditText;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    Button siguiente;
+    private Button siguiente;
     private ArrayList<Datos> arrayParametros = new ArrayList<Datos>();
     private Cliente cliente;
     private EditText nombre;
@@ -24,13 +24,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Enlazamos los objetos a las vistas
         nombre = (EditText) findViewById(R.id.edtNombre);
         direccion = (EditText) findViewById(R.id.edtDireccion);
         telefono = (EditText) findViewById(R.id.edtTelefono);
-
-
-
         siguiente = (Button) findViewById(R.id.Siguiente1);
+
+        //Ponemos el Listener de Click al boton siguiente
         siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,18 +40,28 @@ public class MainActivity extends AppCompatActivity {
     }
     public void LanzarActividad(){
         Intent intent = new Intent(MainActivity.this,EligeTortilla.class);
-        String a = nombre.getText().toString();
-        String b = direccion.getText().toString();
-        String c = telefono.getText().toString();
+
+        //Recogemos los datos de los Text Box
+        String nombreS = nombre.getText().toString();
+        String direccionS = direccion.getText().toString();
+        String TelefonoS = telefono.getText().toString();
+
+        //Inicializamos los objetos que vamos a meter en el arrayList para pasarlo por parametro
         cliente = new Cliente();
         objeto = new Datos();
-        cliente.setNombre(a);
-        cliente.setDireccion(b);
-        cliente.setTelefono(c);
+
+        //Les asignamos los valores correspondientes a los objetos y añadimos al ArrayList
+        cliente.setNombre(nombreS);
+        cliente.setDireccion(direccionS);
+        cliente.setTelefono(TelefonoS);
         objeto.setIdentificador("cliente");
         objeto.setX(cliente);
         arrayParametros.add(objeto);
+
+        //Pasamos por parametro el array List, esto lo podemos hacer porque todas las clases que componen el ArrayList Implementan Serializable
         intent.putExtra("array",arrayParametros);
+
+        //Lanzamos la siguiente actividad
         startActivity(intent);
     }
 }

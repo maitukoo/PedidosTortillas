@@ -20,7 +20,7 @@ public class EligeBebida extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        spin=(Spinner) findViewById(R.id.spinner);
+        spin=(Spinner) findViewById(R.id.cmbTamanio);
         spin.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,tipoBebida));
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
