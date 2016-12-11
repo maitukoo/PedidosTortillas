@@ -11,6 +11,7 @@
     <string name="Siguiente">Siguiente</string>
     <string name="aniadir">Añadir</string>
     <string name="cantidad">Cantidad:</string>
+    <string name="EspecificarCantidad"><font size="5">Especifica la cantidad</font></string>
 
     <string-array name ="Tamanios">
         <item>Individual</item>
