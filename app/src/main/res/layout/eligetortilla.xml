@@ -11,6 +11,14 @@
         android:layout_weight="1"
         android:textSize="25sp"/>
 
+    <TextView
+        android:text="@string/tamanio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtTamanio"
+        android:layout_weight="1"
+        android:textSize="20sp"/>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -21,8 +29,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/cmbTamanio"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@drawable/bordespinner"
+            android:dropDownSelector="@color/blue"/>
     </LinearLayout>
+
+    <TextView
+        android:text="@string/TipoHuevo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtTipoHuevo"
+        android:layout_weight="1"
+        android:textSize="20sp"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -34,8 +52,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/cmbTipoHuevo"
-            android:layout_weight="1" />
+            android:layout_weight="1"/>
     </LinearLayout>
+
+    <TextView
+        android:text="@string/VariedadTortilla"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtVariedadTortilla"
+        android:layout_weight="1"
+        android:textSize="20sp"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -61,7 +87,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textSize="20sp"/>
 
         <EditText
             android:layout_width="wrap_content"
