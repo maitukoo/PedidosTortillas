@@ -11,6 +11,7 @@ import java.io.Serializable;
 
 public class Datos implements Serializable {
     private String identificador;
+    private Object x;
 
     public Object getX() {
         return x;
@@ -19,8 +20,6 @@ public class Datos implements Serializable {
     public void setX(Object x) {
         this.x = x;
     }
-
-    private Object x;
 
 
     public String getIdentificador() {

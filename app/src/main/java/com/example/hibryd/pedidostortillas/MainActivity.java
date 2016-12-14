@@ -12,11 +12,11 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private Button siguiente;
     private ArrayList<Datos> arrayParametros = new ArrayList<Datos>();
-    private Cliente cliente;
     private EditText nombre;
     private EditText direccion;
     private EditText telefono;
-    private Datos objeto;
+    private Datos datos;
+    private Cliente cliente;
 
 
     @Override
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         nombre = (EditText) findViewById(R.id.edtNombre);
         direccion = (EditText) findViewById(R.id.edtDireccion);
         telefono = (EditText) findViewById(R.id.edtTelefono);
-        siguiente = (Button) findViewById(R.id.Siguiente1);
+        siguiente = (Button) findViewById(R.id.SiguienteDatos);
 
         //Ponemos el Listener de Click al boton siguiente
         siguiente.setOnClickListener(new View.OnClickListener() {
@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     public void LanzarActividad(){
         Intent intent = new Intent(MainActivity.this,EligeTortilla.class);
 
@@ -46,17 +47,17 @@ public class MainActivity extends AppCompatActivity {
         String direccionS = direccion.getText().toString();
         String TelefonoS = telefono.getText().toString();
 
-        //Inicializamos los objetos que vamos a meter en el arrayList para pasarlo por parametro
+        //Instaciamos los objetos que vamos a meter en el arrayList para pasarlo por parametro
         cliente = new Cliente();
-        objeto = new Datos();
+        datos = new Datos();
 
         //Les asignamos los valores correspondientes a los objetos y añadimos al ArrayList
         cliente.setNombre(nombreS);
         cliente.setDireccion(direccionS);
         cliente.setTelefono(TelefonoS);
-        objeto.setIdentificador("cliente");
-        objeto.setX(cliente);
-        arrayParametros.add(objeto);
+        datos.setIdentificador("cliente");
+        datos.setX(cliente);
+        arrayParametros.add(datos);
 
         //Pasamos por parametro el array List, esto lo podemos hacer porque todas las clases que componen el ArrayList Implementan Serializable
         intent.putExtra("array",arrayParametros);

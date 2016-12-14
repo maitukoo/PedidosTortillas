@@ -89,11 +89,11 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:inputType="textPersonName"
             android:hint="@string/IntTelefono"
             android:ems="10"
             android:id="@+id/edtTelefono"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:inputType="number" />
     </LinearLayout>
 
     <LinearLayout
@@ -115,7 +115,7 @@
             android:text="@string/Siguiente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/Siguiente1"
+            android:id="@+id/SiguienteDatos"
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
             style="?android:buttonBarButtonStyle"/>

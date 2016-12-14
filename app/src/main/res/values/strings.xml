@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PedidosTortillas</string>
+    <string name="app_name">Tortillaka47</string>
     <string name="Nombre">Nombre:</string>
     <string name="IntNombre">Introduce tu nombre</string>
     <string name="Direccion">Dirección:</string>
@@ -15,6 +15,7 @@
     <string name="tamanio">Tamaño:</string>
     <string name="TipoHuevo">Tipo de huevos:</string>
     <string name="VariedadTortilla">Variedad de tortilla:</string>
+    <string name="Atras">Atras</string>
 
     <string-array name ="Tamanios">
         <item>Individual</item>
