@@ -16,6 +16,7 @@
     <string name="TipoHuevo">Tipo de huevos:</string>
     <string name="VariedadTortilla">Variedad de tortilla:</string>
     <string name="Atras">Atras</string>
+    <string name="Importe">Importe</string>
 
     <string-array name ="Tamanios">
         <item>Individual</item>

@@ -1,15 +1,18 @@
 package com.example.hibryd.pedidostortillas;
 
+import java.io.Serializable;
+
 /**
  * Created by adminportatil on 07/12/2016.
  */
 
-public class Tortilla {
+public class Tortilla implements Serializable {
 
     private int numeroTortillas;
     private String tipoTortilla;
     private String tipoHuevos;
     private String tamanio;
+    private String ggwp;
 
     public int getNumeroTortillas() {
         return numeroTortillas;
