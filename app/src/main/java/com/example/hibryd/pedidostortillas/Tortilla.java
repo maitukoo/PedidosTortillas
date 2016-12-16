@@ -12,7 +12,6 @@ public class Tortilla implements Serializable {
     private String tipoTortilla;
     private String tipoHuevos;
     private String tamanio;
-    private String ggwp;
 
     public int getNumeroTortillas() {
         return numeroTortillas;

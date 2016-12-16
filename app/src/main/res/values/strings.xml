@@ -18,7 +18,7 @@
     <string name="Atras">Atras</string>
     <string name="Importe">Importe</string>
 
-    <string-array name ="Tamanios">
+    <string-array name="Tamanios">
         <item>Individual</item>
         <item>Familiar</item>
     </string-array>
@@ -28,4 +28,5 @@
         <item>Campero</item>
         <item>Ecologico</item>
     </string-array>
+    <string name="title_activity_maps">Map</string>
 </resources>
