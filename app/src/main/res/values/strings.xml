@@ -11,7 +11,7 @@
     <string name="Siguiente">Siguiente</string>
     <string name="aniadir">Añadir</string>
     <string name="cantidad">Cantidad:</string>
-    <string name="EspecificarCantidad"><font size="5">Especifica la cantidad</font></string>
+    <string name="EspecificarCantidad">Especifica la cantidad</string>
     <string name="tamanio">Tamaño:</string>
     <string name="TipoHuevo">Tipo de huevos:</string>
     <string name="VariedadTortilla">Variedad de tortilla:</string>
