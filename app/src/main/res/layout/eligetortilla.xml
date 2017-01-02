@@ -95,13 +95,13 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
-            android:id="@+id/editText" />
+            android:id="@+id/txtcantidadTortilla" />
 
         <Button
             android:text="@string/aniadir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/button"
+            android:id="@+id/btnAniadirTortilla"
             android:layout_weight="1" />
 
     </LinearLayout>

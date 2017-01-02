@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,10 @@ public class MainActivity extends AppCompatActivity {
     private EditText telefono;
     private Datos datos;
     private Cliente cliente;
+    private Toast alertaNombre;
+    private Toast alertaDireccion;
+    private Toast alertaTelefono;
+
 
 
     @Override
@@ -30,11 +35,29 @@ public class MainActivity extends AppCompatActivity {
         telefono = (EditText) findViewById(R.id.edtTelefono);
         siguiente = (Button) findViewById(R.id.SiguienteDatos);
 
+        //Toast para mostrar los mensajes en caso de que no introduzca algun valor.
+        alertaNombre = Toast.makeText(this,"Introduce el nombre",Toast.LENGTH_SHORT);
+        alertaDireccion = Toast.makeText(this,"Introduce la direccion",Toast.LENGTH_SHORT);
+        alertaTelefono=Toast.makeText(this,"Introduce el numero de telefono",Toast.LENGTH_SHORT);
+
+
+
         //Ponemos el Listener de Click al boton siguiente
         siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(nombre.getText().toString().equals("")){
+                    alertaNombre.show();
+                }
+                else if(direccion.getText().toString().equals("")){
+                    alertaDireccion.show();
+                }
+                else if(telefono.getText().toString().equals("")){
+                    alertaTelefono.show();
+                }
+                else{
                LanzarActividad();
+                }
             }
         });
     }

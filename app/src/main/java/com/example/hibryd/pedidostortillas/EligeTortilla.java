@@ -10,10 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -29,17 +31,31 @@ public class EligeTortilla extends AppCompatActivity {
     private Cliente cliente;
     private Datos datos;
     private Tortilla tortilla;
+    private Button aniadir;
     private TextView saludo;
     private Spinner comboTamanio;
     private Spinner comboTipoHuevo;
     private Button siguiente;
+    private EditText cantidadTortilla;
     Spinner spinnerTortillas;
+    private Toast alertaCantidad;
+    private Toast alertaSiguiente;
+    private Toast aniadidoExito;
+    private int cont;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.eligetortilla);
+
+        aniadir=(Button) findViewById(R.id.btnAniadirTortilla);
+        cantidadTortilla = (EditText) findViewById(R.id.txtcantidadTortilla);
+        alertaCantidad = Toast.makeText(this,"Especifica la cantidad",Toast.LENGTH_SHORT);
+        alertaSiguiente = Toast.makeText(this,"Tienes que añadir alguna tortilla al carrito",Toast.LENGTH_SHORT);
+        aniadidoExito=Toast.makeText(this,"Tortilla añadida con exito", Toast.LENGTH_SHORT);
         saludo = (TextView) findViewById(R.id.Saludo);
+
+        //Recogemos los valores de la primera actividad para poder saludar al usuario
         Bundle bnd = getIntent().getExtras();
         arrayParametros = (ArrayList<Datos>) bnd.getSerializable("array");
         cliente = (Cliente)arrayParametros.get(0).getX();
@@ -62,10 +78,51 @@ public class EligeTortilla extends AppCompatActivity {
         AdaptadorTortillas adapter = new AdaptadorTortillas(this,nombre,imageId);
         spinnerTortillas.setAdapter(adapter);
 
+        //Listener del boton añadir
+        aniadir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(cantidadTortilla.getText().toString().equals("")){
+                    alertaCantidad.show();
+                }
+                else {
+                    //Recogemos los datos de los Text Box
+                    String tamanioS = comboTamanio.getSelectedItem().toString();
+                    String huevoS = comboTipoHuevo.getSelectedItem().toString();
+                    int cantidadS = Integer.parseInt(cantidadTortilla.getText().toString());
+                    Log.e("info ", String.valueOf(spinnerTortillas.getSelectedItemId()));
+
+                    //Instaciamos los objetos que vamos a meter en el arrayList para pasarlo por parametro
+                    tortilla = new Tortilla();
+                    datos = new Datos();
+
+                    //Les asignamos los valores correspondientes a los objetos y añadimos al ArrayList
+                    tortilla.setTamanio(tamanioS);
+                    tortilla.setTipoHuevos(huevoS);
+                    tortilla.setCantidad(cantidadS);
+                    datos.setIdentificador("tortilla");
+                    datos.setX(tortilla);
+                    arrayParametros.add(datos);
+                    cont++;
+                }
+
+            }
+        });
+
+        //Listener del boton siguiente
         siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LanzarActividad();
+
+                if(cont != 0) {
+
+                    LanzarActividad();
+                }
+                else{
+                    alertaSiguiente.show();
+                }
+
             }
         });
     }
@@ -77,22 +134,6 @@ public class EligeTortilla extends AppCompatActivity {
 
     public void LanzarActividad(){
         Intent intent = new Intent(EligeTortilla.this,EligeBebida.class);
-
-        //Recogemos los datos de los Text Box
-        String tamanioS = comboTamanio.getSelectedItem().toString();
-        String huevoS = comboTipoHuevo.getSelectedItem().toString();
-        Log.e("info ", String.valueOf(spinnerTortillas.getSelectedItemId()));
-
-        //Instaciamos los objetos que vamos a meter en el arrayList para pasarlo por parametro
-        tortilla = new Tortilla();
-        datos = new Datos();
-
-        //Les asignamos los valores correspondientes a los objetos y añadimos al ArrayList
-        tortilla.setTamanio(tamanioS);
-        tortilla.setTipoHuevos(huevoS);
-        datos.setIdentificador("tortilla");
-        datos.setX(tortilla);
-        arrayParametros.add(datos);
 
         //Pasamos por parametro el array List, esto lo podemos hacer porque todas las clases que componen el ArrayList Implementan Serializable
         intent.putExtra("array",arrayParametros);

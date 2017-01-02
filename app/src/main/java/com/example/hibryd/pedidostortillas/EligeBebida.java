@@ -72,6 +72,15 @@ public class EligeBebida extends AppCompatActivity{
         precioTotalAgua=(TextView)findViewById(R.id.lblPrecioAgua);
         precioTotal=(TextView)findViewById(R.id.lblPrecioTotal);
 
+        //Los ponemos en disabled para que no pueda meter ningun valor hasta que selecione alguna bebida.
+        cantidadCola.setEnabled(false);
+        cantidadLimon.setEnabled(false);
+        cantidadNaranja.setEnabled(false);
+        cantidadNestea.setEnabled(false);
+        cantidadCerveza.setEnabled(false);
+        cantidadAgua.setEnabled(false);
+
+
 
         precioTotal.setText("0");
 
@@ -160,8 +169,7 @@ public class EligeBebida extends AppCompatActivity{
                     precioTotalCola.setText(Double.toString(Double.parseDouble(cantidadCola.getText().toString())* precios[0]));
                 }
                 else {
-                    String cantidad = cantidadCola.getText().toString();
-                    Double resul = (Integer.parseInt(cantidad) * precios[0]);
+                    Double resul = Double.parseDouble(cantidadCola.getText().toString()) * precios[0];
                     precioTotalCola.setText(Double.toString(resul));
                     precioTotal.setText(Double.toString((Double.parseDouble(precioTotal.getText().toString())) + resul));
                 }
