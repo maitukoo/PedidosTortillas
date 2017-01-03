@@ -29,4 +29,5 @@
         <item>Ecologico</item>
     </string-array>
     <string name="title_activity_maps">Map</string>
+    <string name="Resumen">Resumen del pedido</string>
 </resources>

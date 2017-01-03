@@ -17,42 +17,42 @@
             <CheckBox
                 android:text="Refresco de cola 1,50€"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/ckbCola"
                 android:textSize="10dp"/>
 
             <CheckBox
                 android:text="Refresco de limon 1,50€"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/ckbLimon"
                 android:textSize="10dp"/>
 
             <CheckBox
                 android:text="Refresco de naranja 1,50€"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/ckbNaranja"
                 android:textSize="10dp"/>
 
             <CheckBox
                 android:text="Nestea 2€"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/ckbNestea"
                 android:textSize="10dp"/>
 
             <CheckBox
                 android:text="Cerveza 2€"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/ckbCerveza"
                 android:textSize="10dp"/>
 
             <CheckBox
                 android:text="Agua 1€"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/ckbAgua"
                 android:textSize="10dp"/>
 
@@ -127,56 +127,6 @@
             android:layout_height="match_parent"
             android:weightSum="1">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.17"
-                android:id="@+id/lblPrecioCola"
-                android:ems="10"
-                android:textSize="20dp"
-                 />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/lblPrecioLimon"
-                android:textSize="20dp"
-                android:ems="10"
-                android:layout_weight="0.17"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/lblPrecioNaranja"
-                android:textSize="20dp"
-                android:ems="10"
-                android:layout_weight="0.17"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/lblPrecioNestea"
-                android:textSize="20dp"
-                android:ems="10"
-                android:layout_weight="0.17"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/lblPrecioCerveza"
-                android:textSize="20dp"
-                android:ems="10"
-                android:layout_weight="0.17"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/lblPrecioAgua"
-                android:ems="10"
-                android:textSize="20dp"
-                android:layout_weight="0.17"
-                />
         </LinearLayout>
 
     </LinearLayout>

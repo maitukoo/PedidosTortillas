@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private Button siguiente;
+    private Button salir;
     private ArrayList<Datos> arrayParametros = new ArrayList<Datos>();
     private EditText nombre;
     private EditText direccion;
@@ -34,11 +35,20 @@ public class MainActivity extends AppCompatActivity {
         direccion = (EditText) findViewById(R.id.edtDireccion);
         telefono = (EditText) findViewById(R.id.edtTelefono);
         siguiente = (Button) findViewById(R.id.SiguienteDatos);
+        salir=(Button) findViewById(R.id.btnSalir1);
 
         //Toast para mostrar los mensajes en caso de que no introduzca algun valor.
         alertaNombre = Toast.makeText(this,"Introduce el nombre",Toast.LENGTH_SHORT);
         alertaDireccion = Toast.makeText(this,"Introduce la direccion",Toast.LENGTH_SHORT);
         alertaTelefono=Toast.makeText(this,"Introduce el numero de telefono",Toast.LENGTH_SHORT);
+
+        //Programamos el boton salir
+        salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.exit(0);
+            }
+        });
 
 
 

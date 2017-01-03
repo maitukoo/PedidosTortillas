@@ -36,11 +36,12 @@ public class EligeTortilla extends AppCompatActivity {
     private Spinner comboTamanio;
     private Spinner comboTipoHuevo;
     private Button siguiente;
+    private Button atras;
     private EditText cantidadTortilla;
     Spinner spinnerTortillas;
     private Toast alertaCantidad;
     private Toast alertaSiguiente;
-    private Toast aniadidoExito;
+    private Toast alertaAniadidoExito;
     private int cont;
 
 
@@ -48,11 +49,12 @@ public class EligeTortilla extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.eligetortilla);
 
+        atras=(Button) findViewById(R.id.btnAtrasTortilla);
         aniadir=(Button) findViewById(R.id.btnAniadirTortilla);
         cantidadTortilla = (EditText) findViewById(R.id.txtcantidadTortilla);
         alertaCantidad = Toast.makeText(this,"Especifica la cantidad",Toast.LENGTH_SHORT);
         alertaSiguiente = Toast.makeText(this,"Tienes que añadir alguna tortilla al carrito",Toast.LENGTH_SHORT);
-        aniadidoExito=Toast.makeText(this,"Tortilla añadida con exito", Toast.LENGTH_SHORT);
+        alertaAniadidoExito=Toast.makeText(this,"Tortilla añadida con exito", Toast.LENGTH_SHORT);
         saludo = (TextView) findViewById(R.id.Saludo);
 
         //Recogemos los valores de la primera actividad para poder saludar al usuario
@@ -105,8 +107,23 @@ public class EligeTortilla extends AppCompatActivity {
                     datos.setX(tortilla);
                     arrayParametros.add(datos);
                     cont++;
+                    alertaAniadidoExito.show();
                 }
 
+            }
+        });
+
+        //Listener del boton atras
+        //En caso de que haya añadido alguna tortilla al arraylist, tenemos que borrarla
+        atras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (cont > 0){
+                    arrayParametros.clear();
+                    //Ponemos el contador de las tortillas añadidas a cero otra vez porque hemos borrado las tortillas
+                    cont=0;
+                }
+                finish();
             }
         });
 

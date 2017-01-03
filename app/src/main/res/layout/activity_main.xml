@@ -106,7 +106,7 @@
             android:text="@string/Salir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/Salir1"
+            android:id="@+id/btnSalir1"
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
             style="?android:buttonBarButtonStyle"/>
