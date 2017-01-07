@@ -38,12 +38,6 @@ public class EligeBebida extends AppCompatActivity{
     private EditText cantidadNestea;
     private EditText cantidadCerveza;
     private EditText cantidadAgua;
-    private TextView precioTotalCola;
-    private TextView precioTotalLimon;
-    private TextView precioTotalNaranja;
-    private TextView precioTotalNestea;
-    private TextView precioTotalCerveza;
-    private TextView precioTotalAgua;
     private ArrayList<Datos> arrayParametros = new ArrayList<Datos>();
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,12 +58,6 @@ public class EligeBebida extends AppCompatActivity{
         cantidadNestea = (EditText) findViewById(R.id.txtCantidadNestea);
         cantidadCerveza = (EditText) findViewById(R.id.txtCantidadCerveza);
         cantidadAgua = (EditText) findViewById(R.id.txtCantidadAgua);
-        precioTotalCola =(TextView)findViewById(R.id.lblPrecioCola);
-        precioTotalLimon=(TextView)findViewById(R.id.lblPrecioLimon);
-        precioTotalNaranja=(TextView)findViewById(R.id.lblPrecioNaranja);
-        precioTotalNestea=(TextView)findViewById(R.id.lblPrecioNestea);
-        precioTotalCerveza=(TextView)findViewById(R.id.lblPrecioCerveza);
-        precioTotalAgua=(TextView)findViewById(R.id.lblPrecioAgua);
         precioTotal=(TextView)findViewById(R.id.lblPrecioTotal);
 
         //Los ponemos en disabled para que no pueda meter ningun valor hasta que selecione alguna bebida.
@@ -81,9 +69,6 @@ public class EligeBebida extends AppCompatActivity{
         cantidadAgua.setEnabled(false);
 
 
-
-        precioTotal.setText("0");
-
         //Ponemos los listeners para todos los checkBox para que cuando esten checkeados sea posible
         //cambiar el valor de la canitdad.
 
@@ -93,6 +78,11 @@ public class EligeBebida extends AppCompatActivity{
                 if (checkCola.isChecked()) {
                     cantidadCola.setEnabled(true);
                 } else {
+                    if (!cantidadCola.getText().toString().equals("")) {
+                        double cantidad = Double.parseDouble(cantidadCola.getText().toString());
+                        double precioTotalS = Double.parseDouble(precioTotal.getText().toString());
+                        precioTotal.setText(Double.toString(precioTotalS - (precios[0] * cantidad)));
+                    }
                     cantidadCola.setText("");
                     cantidadCola.setEnabled(false);
                 }
@@ -104,7 +94,10 @@ public class EligeBebida extends AppCompatActivity{
                 if (checkLimon.isChecked()) {
                     cantidadLimon.setEnabled(true);
                 } else {
-                    cantidadCola.setText("");
+                    if (!cantidadCola.getText().toString().equals("")) {
+                        precioTotal.setText(Double.toString(Double.parseDouble(precioTotal.getText().toString()) - (precios[1] * Double.parseDouble(cantidadLimon.getText().toString()))));
+                    }
+                    cantidadLimon.setText("");
                     cantidadLimon.setEnabled(false);
                 }
             }
@@ -116,7 +109,10 @@ public class EligeBebida extends AppCompatActivity{
                 if (checkNaranja.isChecked()) {
                     cantidadNaranja.setEnabled(true);
                 } else {
-                    cantidadCola.setText("");
+                    if (!cantidadCola.getText().toString().equals("")) {
+                        precioTotal.setText(Double.toString(Double.parseDouble(precioTotal.getText().toString()) - (precios[2] * Double.parseDouble(cantidadNaranja.getText().toString()))));
+                    }
+                    cantidadNaranja.setText("");
                     cantidadNaranja.setEnabled(false);
                 }
             }
@@ -128,7 +124,10 @@ public class EligeBebida extends AppCompatActivity{
                 if (checkNestea.isChecked()) {
                     cantidadNestea.setEnabled(true);
                 } else {
-                    cantidadCola.setText("");
+                    if (!cantidadCola.getText().toString().equals("")) {
+                        precioTotal.setText(Double.toString(Double.parseDouble(precioTotal.getText().toString()) - (precios[3] * Double.parseDouble(cantidadNestea.getText().toString()))));
+                    }
+                    cantidadNestea.setText("");
                     cantidadNestea.setEnabled(false);
                 }
             }
@@ -140,7 +139,10 @@ public class EligeBebida extends AppCompatActivity{
                 if (checkCerveza.isChecked()) {
                     cantidadCerveza.setEnabled(true);
                 } else {
-                    cantidadCola.setText("");
+                    if (!cantidadCola.getText().toString().equals("")) {
+                        precioTotal.setText(Double.toString(Double.parseDouble(precioTotal.getText().toString()) - (precios[4] * Double.parseDouble(cantidadCerveza.getText().toString()))));
+                    }
+                    cantidadCerveza.setText("");
                     cantidadCerveza.setEnabled(false);
                 }
             }
@@ -151,32 +153,129 @@ public class EligeBebida extends AppCompatActivity{
                 if (checkAgua.isChecked()) {
                     cantidadAgua.setEnabled(true);
                 } else {
-                    cantidadCola.setText("");
+                    if (!cantidadCola.getText().toString().equals("")) {
+                        precioTotal.setText(Double.toString(Double.parseDouble(precioTotal.getText().toString()) - (precios[5] * Double.parseDouble(cantidadAgua.getText().toString()))));
+                    }
+                    cantidadAgua.setText("");
                     cantidadAgua.setEnabled(false);
                 }
             }
         });
 
-        //Listeners para que cuando introduzca la cantidad de bebida deseada se actualice su precio en cuestion.
+        //Listeners para que cuando introduzca la cantidad de bebida deseada se actualice su precio Total
 
         cantidadCola.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (!cantidadCola.getText().toString().equals("")) {
+                    double cantidad = Double.parseDouble(cantidadCola.getText().toString());
+                    double precioTotalS = Double.parseDouble(precioTotal.getText().toString());
 
-                if(keyCode == KeyEvent.KEYCODE_DEL) {
-                    //Cuando borra tiene que recalcular los valores.
-                    precioTotal.setText(Double.toString(Double.parseDouble(precioTotal.getText().toString())- Double.parseDouble(precioTotalCola.toString())));
-                    precioTotalCola.setText(Double.toString(Double.parseDouble(cantidadCola.getText().toString())* precios[0]));
-                }
-                else {
-                    Double resul = Double.parseDouble(cantidadCola.getText().toString()) * precios[0];
-                    precioTotalCola.setText(Double.toString(resul));
-                    precioTotal.setText(Double.toString((Double.parseDouble(precioTotal.getText().toString())) + resul));
+
+                    if (keyCode == KeyEvent.KEYCODE_DEL) {
+                        //Cuando borra tiene que recalcular los valores.
+                        precioTotal.setText(Double.toString(precioTotalS - (precios[0] * cantidad)));
+                    } else {
+                        precioTotal.setText(Double.toString(precioTotalS + (precios[0] * cantidad)));
+                    }
                 }
                 return false;
             }
         });
 
+        cantidadLimon.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (!cantidadLimon.getText().toString().equals("")) {
+                    double cantidad = Double.parseDouble(cantidadLimon.getText().toString());
+                    double precioTotalS = Double.parseDouble(precioTotal.getText().toString());
 
+
+                    if (keyCode == KeyEvent.KEYCODE_DEL) {
+                        //Cuando borra tiene que recalcular los valores.
+                        precioTotal.setText(Double.toString(precioTotalS - (precios[1]* cantidad)));
+                    } else {
+                        precioTotal.setText(Double.toString(precioTotalS + (precios[1] * cantidad)));
+                    }
+                }
+                return false;
+            }
+        });
+
+        cantidadNaranja.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (!cantidadNaranja.getText().toString().equals("")) {
+                    double cantidad = Double.parseDouble(cantidadNaranja.getText().toString());
+                    double precioTotalS = Double.parseDouble(precioTotal.getText().toString());
+
+
+                    if (keyCode == KeyEvent.KEYCODE_DEL) {
+                        //Cuando borra tiene que recalcular los valores.
+                        precioTotal.setText(Double.toString(precioTotalS - (precios[2]* cantidad)));
+                    } else {
+                        precioTotal.setText(Double.toString(precioTotalS + (precios[2] * cantidad)));
+                    }
+                }
+                return false;
+            }
+        });
+
+        cantidadNestea.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (!cantidadNestea.getText().toString().equals("")) {
+                    double cantidad = Double.parseDouble(cantidadNestea.getText().toString());
+                    double precioTotalS = Double.parseDouble(precioTotal.getText().toString());
+
+
+                    if (keyCode == KeyEvent.KEYCODE_DEL) {
+                        //Cuando borra tiene que recalcular los valores.
+                        precioTotal.setText(Double.toString(precioTotalS - (precios[3]* cantidad)));
+                    } else {
+                        precioTotal.setText(Double.toString(precioTotalS + (precios[3] * cantidad)));
+                    }
+                }
+                return false;
+            }
+        });
+
+        cantidadCerveza.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (!cantidadCerveza.getText().toString().equals("")) {
+                    double cantidad = Double.parseDouble(cantidadCerveza.getText().toString());
+                    double precioTotalS = Double.parseDouble(precioTotal.getText().toString());
+
+
+                    if (keyCode == KeyEvent.KEYCODE_DEL) {
+                        //Cuando borra tiene que recalcular los valores.
+                        precioTotal.setText(Double.toString(precioTotalS - (precios[4]* cantidad)));
+                    } else {
+                        precioTotal.setText(Double.toString(precioTotalS + (precios[4] * cantidad)));
+                    }
+                }
+                return false;
+            }
+        });
+
+        cantidadAgua.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (!cantidadAgua.getText().toString().equals("")) {
+                    double cantidad = Double.parseDouble(cantidadAgua.getText().toString());
+                    double precioTotalS = Double.parseDouble(precioTotal.getText().toString());
+
+
+                    if (keyCode == KeyEvent.KEYCODE_DEL) {
+                        //Cuando borra tiene que recalcular los valores.
+                        precioTotal.setText(Double.toString(precioTotalS - (precios[5]* cantidad)));
+                    } else {
+                        precioTotal.setText(Double.toString(precioTotalS + (precios[5] * cantidad)));
+                    }
+                }
+                return false;
+            }
+        });
     }
 }

@@ -30,4 +30,5 @@
     </string-array>
     <string name="title_activity_maps">Map</string>
     <string name="Resumen">Resumen del pedido</string>
+    <string name="bebidas">¿Que bebidas deseas tomar?</string>
 </resources>
