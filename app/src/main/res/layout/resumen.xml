@@ -25,22 +25,21 @@
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id = "@+id/lstNombres">
-            <TextView
-                android:id="@+id/emptry"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </ListView>
+            android:id = "@+id/lstNombres"
+            android:layout_weight="1" />
+
 
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id = "@+id/lstCantidades"/>
+            android:id = "@+id/lstCantidades"
+            android:layout_weight="1" />
 
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id = "@+id/lstPreciosTotales"/>
+            android:id = "@+id/lstPreciosTotales"
+            android:layout_weight="1" />
     </LinearLayout>
 
 </LinearLayout>

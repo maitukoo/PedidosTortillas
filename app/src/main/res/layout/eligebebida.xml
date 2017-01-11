@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_weight="1">
 
     <TextView
         android:layout_width="match_parent"
@@ -11,119 +13,137 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:gravity="left"
+        android:textAlignment="inherit"
+        android:layout_weight="0.00"
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textAlignment="textStart">
 
             <CheckBox
                 android:text="Refresco de cola 1,50€"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/ckbCola"
-                android:textSize="10dp"/>
+                android:textSize="16sp"
+                android:layout_weight="1"
+                android:textAlignment="textStart" />
 
             <CheckBox
                 android:text="Refresco de limon 1,50€"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/ckbLimon"
-                android:textSize="10dp"/>
+                android:textSize="16sp"
+                android:layout_weight="1" />
 
             <CheckBox
                 android:text="Refresco de naranja 1,50€"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/ckbNaranja"
-                android:textSize="10dp"/>
+                android:textSize="16sp"
+                android:layout_weight="1" />
 
             <CheckBox
                 android:text="Nestea 2€"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/ckbNestea"
-                android:textSize="10dp"/>
+                android:textSize="16sp"
+                android:layout_weight="1" />
 
             <CheckBox
                 android:text="Cerveza 2€"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/ckbCerveza"
-                android:textSize="10dp"/>
+                android:textSize="16sp"
+                android:layout_weight="1" />
 
             <CheckBox
                 android:text="Agua 1€"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/ckbAgua"
-                android:textSize="10dp"/>
+                android:textSize="16sp"
+                android:layout_weight="1" />
 
         </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:weightSum="1">
+            android:layout_width="match_parent"
+            android:layout_weight="1.5"
+            android:textAlignment="textStart"
+            android:layout_height="wrap_content">
 
             <EditText
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                android:id="@+id/txtCantidadCola"
+                android:hint="@string/EspecificarCantidad"
+                android:textSize="12sp"
+                android:layout_weight="1"
+                android:elevation="0dp" />
+
+            <EditText
                 android:layout_height="match_parent"
                 android:inputType="number"
                 android:ems="10"
-                android:id="@+id/txtCantidadCola"
-                android:hint="@string/EspecificarCantidad"
-                android:textSize="9dp" />
-
-            <EditText
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:ems="10"
                 android:id="@+id/txtCantidadLimon"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:hint="@string/EspecificarCantidad"
-                android:textSize="9dp"/>
+                android:textSize="12sp"
+                android:layout_weight="1" />
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:inputType="number"
                 android:ems="10"
                 android:id="@+id/txtCantidadnaranja"
                 android:hint="@string/EspecificarCantidad"
-                android:textSize="9dp"/>
+                android:textSize="12sp"
+                android:layout_weight="1" />
 
             <EditText
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:inputType="number"
                 android:ems="10"
                 android:id="@+id/txtCantidadNestea"
-                android:layout_weight="0.00"
-                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:hint="@string/EspecificarCantidad"
-                android:textSize="9dp"/>
+                android:textSize="12sp"/>
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:inputType="number"
                 android:ems="10"
                 android:id="@+id/txtCantidadCerveza"
                 android:hint="@string/EspecificarCantidad"
-                android:textSize="9dp"/>
+                android:textSize="12sp"
+                android:layout_weight="1" />
 
             <EditText
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:inputType="number"
                 android:ems="10"
                 android:id="@+id/txtCantidadAgua"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:hint="@string/EspecificarCantidad"
-                android:textSize="9dp"/>
+                android:textSize="12sp"
+                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -140,7 +160,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView13"
-            android:layout_weight="0.20" />
+            android:layout_weight="1" />
 
         <TextView
             android:layout_width="wrap_content"

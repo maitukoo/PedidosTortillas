@@ -85,11 +85,35 @@ public class EligeTortilla extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                int tortillaElegida;
                 if(cantidadTortilla.getText().toString().equals("")){
                     alertaCantidad.show();
                 }
                 else {
                     //Recogemos los datos de los Text Box
+                    tortillaElegida = spinnerTortillas.getSelectedItemPosition();
+                    String tipoTortilla = "";
+                    switch (tortillaElegida){
+                        case 0:
+                            tipoTortilla = "Patata";
+                            break;
+                        case 1:
+                            tipoTortilla = "Verduras";
+                            break;
+                        case 2:
+                            tipoTortilla = "Bacalao";
+                            break;
+                        case 3:
+                            tipoTortilla = "Jamon";
+                            break;
+                        case 4:
+                            tipoTortilla = "Queso Idiazabal";
+                            break;
+                        case 5:
+                            tipoTortilla = "Hongos";
+                            break;
+
+                    }
                     String tamanioS = comboTamanio.getSelectedItem().toString();
                     String huevoS = comboTipoHuevo.getSelectedItem().toString();
                     int cantidadS = Integer.parseInt(cantidadTortilla.getText().toString());
@@ -103,6 +127,7 @@ public class EligeTortilla extends AppCompatActivity {
                     tortilla.setTamanio(tamanioS);
                     tortilla.setTipoHuevos(huevoS);
                     tortilla.setCantidad(cantidadS);
+                    tortilla.setTipoTortilla(tipoTortilla);
                     datos.setIdentificador("tortilla");
                     datos.setX(tortilla);
                     arrayParametros.add(datos);

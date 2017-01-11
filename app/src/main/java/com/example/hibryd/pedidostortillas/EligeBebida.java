@@ -271,11 +271,12 @@ public class EligeBebida extends AppCompatActivity{
     }
     public void LanzarActividad(){
         Intent intent = new Intent(EligeBebida.this,Resumen.class);
-        datos = new Datos();
+
 
         //Instaciamos los objetos que vamos a meter en el arrayList para pasarlo por parametro
         for (int i=0;i<=5; i++) {
             if (cantidades[i] != 0){
+                datos = new Datos();
                 bebida = new Bebida();
                 //Les asignamos los valores correspondientes a los objetos y añadimos al ArrayList
                 bebida.setNumeroBebidas((int) cantidades[i]);
