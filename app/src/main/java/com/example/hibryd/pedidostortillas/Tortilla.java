@@ -8,10 +8,14 @@ import java.io.Serializable;
 
 public class Tortilla implements Serializable {
 
-    private int numeroTortillas;
     private String tipoTortilla;
     private String tipoHuevos;
     private int cantidad;
+    private String tamanio;
+
+
+
+    private double precioUnitario;
 
     public int getCantidad() {
         return cantidad;
@@ -21,15 +25,7 @@ public class Tortilla implements Serializable {
         this.cantidad = cantidad;
     }
 
-    private String tamanio;
 
-    public int getNumeroTortillas() {
-        return numeroTortillas;
-    }
-
-    public void setNumeroTortillas(int numeroTortillas) {
-        this.numeroTortillas = numeroTortillas;
-    }
 
     public String getTipoTortilla() {
         return tipoTortilla;
@@ -53,6 +49,14 @@ public class Tortilla implements Serializable {
 
     public void setTamanio(String tamanio) {
         this.tamanio = tamanio;
+    }
+
+    public double getPrecioUnitario() {
+        return precioUnitario;
+    }
+
+    public void setPrecioUnitario(double precioUnitario) {
+        this.precioUnitario = precioUnitario;
     }
 
 

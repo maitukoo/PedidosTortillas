@@ -1,10 +1,12 @@
 package com.example.hibryd.pedidostortillas;
 
+import java.io.Serializable;
+
 /**
  * Created by adminportatil on 14/12/2016.
  */
 
-public class Bebida {
+public class Bebida implements Serializable {
     private int numeroBebidas;
     private String tipoBebida;
     private double precioUnitario;

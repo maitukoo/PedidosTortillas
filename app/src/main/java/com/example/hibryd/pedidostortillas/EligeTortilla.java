@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class EligeTortilla extends AppCompatActivity {
 
-    String[] nombre = {"Patata","Verduras","Bacalao","Jamon Iberico","Queso Idiazabal", "Hongos"};
+    String[] nombre = {"Patata 6€","Verduras 6€","Bacalao 8€","Jamon Iberico 10€","Queso Idiazabal 10€", "Hongos 9€"};
     Integer[] imageId = {R.drawable.tpatata,R.drawable.tverdura,R.drawable.tbacalao,R.drawable.tjamon,R.drawable.tpatata,R.drawable.thongos};
     private ArrayList<Datos> arrayParametros = new ArrayList<Datos>();
     private Cliente cliente;

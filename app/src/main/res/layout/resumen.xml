@@ -20,6 +20,27 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></LinearLayout>
+        android:layout_height="match_parent">
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id = "@+id/lstNombres">
+            <TextView
+                android:id="@+id/emptry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </ListView>
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id = "@+id/lstCantidades"/>
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id = "@+id/lstPreciosTotales"/>
+    </LinearLayout>
 
 </LinearLayout>

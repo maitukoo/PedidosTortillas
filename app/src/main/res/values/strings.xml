@@ -20,13 +20,13 @@
 
     <string-array name="Tamanios">
         <item>Individual</item>
-        <item>Familiar</item>
+        <item>Familiar +5€</item>
     </string-array>
 
     <string-array name="TipoHuevos">
-        <item>Granja</item>
-        <item>Campero</item>
-        <item>Ecologico</item>
+        <item>Granja </item>
+        <item>Campero +2€</item>
+        <item>Ecologico +3€</item>
     </string-array>
     <string name="title_activity_maps">Map</string>
     <string name="Resumen">Resumen del pedido</string>
