@@ -28,7 +28,7 @@ public class EligeBebida extends AppCompatActivity{
     private Bebida bebida;
     private Datos datos;
     private Button botonSiguinte;
-    private double precioTotalFinal = 0;
+    private double precioTotalBebidas = 0;
     private TextView precioTotal;
     private CheckBox checkCola;
     private CheckBox checkLimon;
@@ -262,13 +262,13 @@ public class EligeBebida extends AppCompatActivity{
     }
 
     private void RecalcularPrecioTotal(){
-        precioTotalFinal=0;
+        precioTotalBebidas=0;
         for (int i=0;i<=5;i++){
-            precioTotalFinal+= cantidades[i] * precios[i];
+            precioTotalBebidas+= cantidades[i] * precios[i];
         }
-        precioTotal.setText(Double.toString(precioTotalFinal));
-
+        precioTotal.setText(Double.toString(precioTotalBebidas));
     }
+
     public void LanzarActividad(){
         Intent intent = new Intent(EligeBebida.this,Resumen.class);
 

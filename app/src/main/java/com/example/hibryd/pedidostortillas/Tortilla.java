@@ -12,9 +12,6 @@ public class Tortilla implements Serializable {
     private String tipoHuevos;
     private int cantidad;
     private String tamanio;
-
-
-
     private double precioUnitario;
 
     public int getCantidad() {
@@ -24,7 +21,6 @@ public class Tortilla implements Serializable {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-
 
 
     public String getTipoTortilla() {

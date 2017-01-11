@@ -25,11 +25,13 @@ import java.util.ArrayList;
 
 public class EligeTortilla extends AppCompatActivity {
 
+    private double precios[]={6,6,8,10,10,9};
     String[] nombre = {"Patata 6€","Verduras 6€","Bacalao 8€","Jamon Iberico 10€","Queso Idiazabal 10€", "Hongos 9€"};
     Integer[] imageId = {R.drawable.tpatata,R.drawable.tverdura,R.drawable.tbacalao,R.drawable.tjamon,R.drawable.tpatata,R.drawable.thongos};
     private ArrayList<Datos> arrayParametros = new ArrayList<Datos>();
     private Cliente cliente;
     private Datos datos;
+    private double precioTotalTortillas;
     private Tortilla tortilla;
     private Button aniadir;
     private TextView saludo;
@@ -112,8 +114,8 @@ public class EligeTortilla extends AppCompatActivity {
                         case 5:
                             tipoTortilla = "Hongos";
                             break;
-
                     }
+
                     String tamanioS = comboTamanio.getSelectedItem().toString();
                     String huevoS = comboTipoHuevo.getSelectedItem().toString();
                     int cantidadS = Integer.parseInt(cantidadTortilla.getText().toString());
@@ -133,6 +135,7 @@ public class EligeTortilla extends AppCompatActivity {
                     arrayParametros.add(datos);
                     cont++;
                     alertaAniadidoExito.show();
+
                 }
 
             }
@@ -173,6 +176,8 @@ public class EligeTortilla extends AppCompatActivity {
         nombre = cliente.getNombre();
         saludo.setText("Buenas " + nombre + ", que deseas para tu pedido?");
     }
+
+
 
     public void LanzarActividad(){
         Intent intent = new Intent(EligeTortilla.this,EligeBebida.class);

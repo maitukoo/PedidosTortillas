@@ -31,4 +31,6 @@
     <string name="title_activity_maps">Map</string>
     <string name="Resumen">Resumen del pedido</string>
     <string name="bebidas">¿Que bebidas deseas tomar?</string>
+    <string name="Concepto">Concepto:</string>
+    <string name="precio">Precio:</string>
 </resources>
