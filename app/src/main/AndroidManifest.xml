@@ -11,6 +11,7 @@
         android:icon="@mipmap/tortillaka47"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity android:name=".FirstMapActivity">
             <intent-filter>

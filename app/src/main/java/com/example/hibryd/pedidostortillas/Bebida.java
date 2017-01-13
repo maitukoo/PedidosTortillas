@@ -7,15 +7,15 @@ import java.io.Serializable;
  */
 
 public class Bebida implements Serializable {
-    private int numeroBebidas;
+    private Double numeroBebidas;
     private String tipoBebida;
     private double precioUnitario;
 
-    public int getNumeroBebidas() {
+    public Double getNumeroBebidas() {
         return numeroBebidas;
     }
 
-    public void setNumeroBebidas(int numeroBebidas) {
+    public void setNumeroBebidas(Double numeroBebidas) {
         this.numeroBebidas = numeroBebidas;
     }
 

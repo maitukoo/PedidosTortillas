@@ -4,19 +4,26 @@ import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.vision.text.Line;
 
 import org.w3c.dom.Text;
 
@@ -38,58 +45,92 @@ public class Resumen extends AppCompatActivity {
     private Tortilla tortilla;
     private Bebida bebida;
     private PopupWindow ventana;
-    private LinearLayout contenedorVentana;
-    private ViewGroup.LayoutParams paramsVentana;
+    private LayoutInflater inflater;
+    private LinearLayout layoutVentana;
     private Button aceptar;
     private Button cancelar;
-    private TextView textoVentana;
+    private int posicionSeleccionada;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resumen);
 
-        ventana = new PopupWindow(this);
-        contenedorVentana = new LinearLayout(this);
-        aceptar = new Button(this);
-        cancelar = new Button(this);
-        textoVentana=new TextView(this);
 
-        textoVentana.setText("Desea borrar esta linea");
-        paramsVentana = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        contenedorVentana.setOrientation(LinearLayout.VERTICAL);
-        contenedorVentana.addView(textoVentana,paramsVentana);
-        ventana.setContentView(contenedorVentana);
+        //Todo lo necesario para el popup
+        layoutVentana = (LinearLayout) findViewById(R.id.linearLayout);
+        inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        ViewGroup container = (ViewGroup) inflater.inflate(R.layout.avisoborrar,null);
+        ventana = new PopupWindow(container,1000,1000,true);
 
+        //A los botones tenemos que ponerles apuntadores pero diciendole que es del CONTAINER!!
+        aceptar=(Button) container.findViewById(R.id.btnAceptarBorrar);
+        cancelar=(Button) container.findViewById(R.id.btnCancelarBorrar);
+
+        //Recogida de datos del arraylist
         Bundle bnd = getIntent().getExtras();
         arrayParametros = (ArrayList<Datos>) bnd.getSerializable("array");
 
 
+        //Apuntadores a los listview
         nombres = (ListView) findViewById(R.id.lstNombres);
         cantidades = (ListView) findViewById(R.id.lstCantidades);
         preciosTotales = (ListView) findViewById(R.id.lstPreciosTotales);
 
+
+        //En caso de que pulse con el dedo fuera del popup se cerrara el popup.
+        container.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                ventana.dismiss();
+                return false;
+            }
+        });
+
+        //En el caso de que pulse aceptar tendremos que borrar ese pedido.
+        aceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ventana.dismiss();
+                borrarDatosArray(posicionSeleccionada);
+            }
+        });
+
+        //En el caso de cancelar no tendremos que hacer nada mas que cerrar la ventana.
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ventana.dismiss();
+            }
+        });
+
+        //Listener para cuando selecionan un pedido del carrito poder sacar el popup y pedirle si lo quiere borrar o no.
         nombres.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                OpcionBorrar(position);
+                ventana.showAtLocation(layoutVentana,Gravity.CENTER,500,500);
+                posicionSeleccionada=position;
                 return true;
             }
         });
         cantidades.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                OpcionBorrar(position);
+                ventana.showAtLocation(layoutVentana,Gravity.CENTER,500,500);
+                posicionSeleccionada=position;
                 return false;
             }
         });
         preciosTotales.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                OpcionBorrar(position);
+                ventana.showAtLocation(layoutVentana,Gravity.CENTER,500,500);
+                posicionSeleccionada=position;
                 return false;
             }
         });
+
+        //Desglosamos todo el pedido en los listviews correspondientes.
         DesglosarPedido();
         ArrayAdapter<String> adaptadornombres;
         adaptadornombres = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,nombresA);
@@ -133,9 +174,18 @@ public class Resumen extends AppCompatActivity {
                 }
             }
 
+
         }
-    public void OpcionBorrar(int pos){
-        ventana.showAtLocation(contenedorVentana, Gravity.BOTTOM,10,10);
-        ventana.update();
+    //Metodo para sacar la ventana en caso de que seleccione un pedido del resumen.
+    public void borrarDatosArray(int pos){
+        arrayParametros.remove(pos+1);
+        for(int i=0;i<arrayParametros.size();i++) {
+            Log.e("info: ", arrayParametros.get(i).toString());
+        }
+        DesglosarPedido();
+        ((BaseAdapter) nombres.getAdapter()).notifyDataSetChanged();
+        ((BaseAdapter) cantidades.getAdapter()).notifyDataSetChanged();
+        ((BaseAdapter) preciosTotales.getAdapter()).notifyDataSetChanged();
+
     }
 }

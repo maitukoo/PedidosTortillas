@@ -40,7 +40,6 @@ public class AdaptadorTortillas extends ArrayAdapter<String> {
     public View getCustomView(int position, View convertView, ViewGroup parent) {
 
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //Me parece que el fallo de cambio de actividad es en este punto, algo de que se pasa de la memoria 'Out of memory on a 44382852-byte allocation.'"
         View row = inflater.inflate(R.layout.spinnerrow, parent, false);
 
         TextView textView = (TextView) row.findViewById(R.id.NombreBebida);

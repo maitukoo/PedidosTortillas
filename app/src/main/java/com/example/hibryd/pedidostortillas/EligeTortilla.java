@@ -79,7 +79,7 @@ public class EligeTortilla extends AppCompatActivity {
         adaptadorTipoHuevo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         comboTipoHuevo.setAdapter(adaptadorTipoHuevo);
 
-        spinnerTortillas = (Spinner)findViewById(R.id.cmbTipoTortilla);
+        spinnerTortillas = (Spinner) findViewById(R.id.cmbTipoTortilla);
         AdaptadorTortillas adapter = new AdaptadorTortillas(this,nombre,imageId);
         spinnerTortillas.setAdapter(adapter);
 

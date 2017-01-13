@@ -279,7 +279,7 @@ public class EligeBebida extends AppCompatActivity{
                 datos = new Datos();
                 bebida = new Bebida();
                 //Les asignamos los valores correspondientes a los objetos y añadimos al ArrayList
-                bebida.setNumeroBebidas((int) cantidades[i]);
+                bebida.setNumeroBebidas(cantidades[i]);
                 bebida.setPrecioUnitario(precios[i]);
                 bebida.setTipoBebida(nombreBebidas[i]);
                 datos.setIdentificador("bebida");
@@ -294,6 +294,11 @@ public class EligeBebida extends AppCompatActivity{
 
         //Lanzamos la siguiente actividad
         startActivity(intent);
+    }
+
+    public void onResume(){
+        super.onResume();
+
     }
 
 }
