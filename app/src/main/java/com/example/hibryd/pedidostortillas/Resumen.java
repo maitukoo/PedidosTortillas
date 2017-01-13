@@ -58,7 +58,7 @@ public class Resumen extends AppCompatActivity {
 
 
         //Todo lo necesario para el popup
-        layoutVentana = (LinearLayout) findViewById(R.id.linearLayout);
+        layoutVentana = (LinearLayout) findViewById(R.id.linearLayo_ut);
         inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         ViewGroup container = (ViewGroup) inflater.inflate(R.layout.avisoborrar,null);
         ventana = new PopupWindow(container,1000,1000,true);
@@ -176,12 +176,9 @@ public class Resumen extends AppCompatActivity {
 
 
         }
-    //Metodo para sacar la ventana en caso de que seleccione un pedido del resumen.
+    //Metodo para borrar los datos;
     public void borrarDatosArray(int pos){
         arrayParametros.remove(pos+1);
-        for(int i=0;i<arrayParametros.size();i++) {
-            Log.e("info: ", arrayParametros.get(i).toString());
-        }
         DesglosarPedido();
         ((BaseAdapter) nombres.getAdapter()).notifyDataSetChanged();
         ((BaseAdapter) cantidades.getAdapter()).notifyDataSetChanged();
