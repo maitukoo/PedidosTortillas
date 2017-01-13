@@ -98,4 +98,12 @@ public class MainActivity extends AppCompatActivity {
         //Lanzamos la siguiente actividad
         startActivity(intent);
     }
+
+    public void onResume(){
+        super.onResume();
+        arrayParametros.clear();
+        nombre.setText("");
+        direccion.setText("");
+        telefono.setText("");
+    }
 }

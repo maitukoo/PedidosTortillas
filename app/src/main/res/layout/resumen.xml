@@ -47,13 +47,14 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="365dp">
 
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id = "@+id/lstNombres"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:longClickable="true" />
 
 
         <ListView
@@ -67,6 +68,28 @@
             android:layout_height="match_parent"
             android:id = "@+id/lstPreciosTotales"
             android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:text="@string/Borrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button3"
+            android:layout_weight="1"
+            style="?android:buttonBarButtonStyle"/>
+
+        <Button
+            android:text="@string/Finalizar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button4"
+            android:layout_weight="1"
+            style="?android:buttonBarButtonStyle"/>
     </LinearLayout>
 
 </LinearLayout>

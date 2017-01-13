@@ -28,7 +28,7 @@ public class EligeTortilla extends AppCompatActivity {
     private double precios[]={6,6,8,10,10,9};
     String[] nombre = {"Patata 6€","Verduras 6€","Bacalao 8€","Jamon Iberico 10€","Queso Idiazabal 10€", "Hongos 9€"};
     Integer[] imageId = {R.drawable.tpatata,R.drawable.tverdura,R.drawable.tbacalao,R.drawable.tjamon,R.drawable.tpatata,R.drawable.thongos};
-    private ArrayList<Datos> arrayParametros = new ArrayList<Datos>();
+    private ArrayList<Datos> arrayParametros;
     private Cliente cliente;
     private Datos datos;
     private double precioTotalTortillas;
@@ -61,6 +61,7 @@ public class EligeTortilla extends AppCompatActivity {
 
         //Recogemos los valores de la primera actividad para poder saludar al usuario
         Bundle bnd = getIntent().getExtras();
+        arrayParametros = new ArrayList<Datos>();
         arrayParametros = (ArrayList<Datos>) bnd.getSerializable("array");
         cliente = (Cliente)arrayParametros.get(0).getX();
         Saludar();
@@ -126,6 +127,7 @@ public class EligeTortilla extends AppCompatActivity {
                     datos = new Datos();
 
                     //Les asignamos los valores correspondientes a los objetos y añadimos al ArrayList
+                    tortilla.setPrecioUnitario(CalculaPrecioTortilla());
                     tortilla.setTamanio(tamanioS);
                     tortilla.setTipoHuevos(huevoS);
                     tortilla.setCantidad(cantidadS);
@@ -188,4 +190,46 @@ public class EligeTortilla extends AppCompatActivity {
         //Lanzamos la siguiente actividad
         startActivity(intent);
     }
+
+    public double CalculaPrecioTortilla(){
+        double precioTortilla=0;
+        switch (comboTipoHuevo.getSelectedItemPosition()) {
+            case 1:
+                precioTortilla += 2;
+                break;
+            case 2:
+                precioTortilla += 3;
+        }
+
+        switch (comboTamanio.getSelectedItemPosition()){
+            case 1:
+                precioTortilla+=5;
+                break;
+        }
+        switch (spinnerTortillas.getSelectedItemPosition()){
+            case 0:
+                precioTortilla+=6;
+                break;
+            case 1:
+                precioTortilla+=6;
+                break;
+            case 2:
+                precioTortilla+=8;
+                break;
+            case 3:
+                precioTortilla+=10;
+                break;
+            case 4:
+                precioTortilla+=10;
+                break;
+            case 5:
+                precioTortilla+=9;
+                break;
+
+        }
+        return precioTortilla;
+
+
+    }
+
 }

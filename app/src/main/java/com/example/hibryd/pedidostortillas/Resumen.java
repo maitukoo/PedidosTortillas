@@ -1,11 +1,24 @@
 package com.example.hibryd.pedidostortillas;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutCompat;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -24,17 +37,29 @@ public class Resumen extends AppCompatActivity {
     private ArrayList<String> preciosTotalesA= new ArrayList<>();
     private Tortilla tortilla;
     private Bebida bebida;
-    private String nombresArray[];
-    private String cantidadesArray[];
-    private String preciosArray[];
-
-
-
+    private PopupWindow ventana;
+    private LinearLayout contenedorVentana;
+    private ViewGroup.LayoutParams paramsVentana;
+    private Button aceptar;
+    private Button cancelar;
+    private TextView textoVentana;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resumen);
+
+        ventana = new PopupWindow(this);
+        contenedorVentana = new LinearLayout(this);
+        aceptar = new Button(this);
+        cancelar = new Button(this);
+        textoVentana=new TextView(this);
+
+        textoVentana.setText("Desea borrar esta linea");
+        paramsVentana = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        contenedorVentana.setOrientation(LinearLayout.VERTICAL);
+        contenedorVentana.addView(textoVentana,paramsVentana);
+        ventana.setContentView(contenedorVentana);
 
         Bundle bnd = getIntent().getExtras();
         arrayParametros = (ArrayList<Datos>) bnd.getSerializable("array");
@@ -44,10 +69,30 @@ public class Resumen extends AppCompatActivity {
         cantidades = (ListView) findViewById(R.id.lstCantidades);
         preciosTotales = (ListView) findViewById(R.id.lstPreciosTotales);
 
+        nombres.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                OpcionBorrar(position);
+                return true;
+            }
+        });
+        cantidades.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                OpcionBorrar(position);
+                return false;
+            }
+        });
+        preciosTotales.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                OpcionBorrar(position);
+                return false;
+            }
+        });
         DesglosarPedido();
         ArrayAdapter<String> adaptadornombres;
         adaptadornombres = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,nombresA);
-
 
 
         ArrayAdapter<String> adaptadorcantidad;
@@ -63,6 +108,9 @@ public class Resumen extends AppCompatActivity {
     }
 
     public void DesglosarPedido(){
+        nombresA.clear();
+        cantidadesA.clear();
+        preciosTotalesA.clear();
 
         Double precioTotal;
         for (int i = 0; i< arrayParametros.size();i++){
@@ -86,4 +134,8 @@ public class Resumen extends AppCompatActivity {
             }
 
         }
+    public void OpcionBorrar(int pos){
+        ventana.showAtLocation(contenedorVentana, Gravity.BOTTOM,10,10);
+        ventana.update();
+    }
 }

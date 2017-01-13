@@ -33,4 +33,11 @@
     <string name="bebidas">¿Que bebidas deseas tomar?</string>
     <string name="Concepto">Concepto:</string>
     <string name="precio">Precio:</string>
+    <string name="Borrar">Borrar</string>
+    <string name="Finalizar">Finalizar Pedido</string>
+    <string name="btnInicio">Inicio</string>
+    <string name="btnInfo">Info</string>
+    <string name="btnLlamar">Llamar</string>
+    <string name="Tortillaka47">Tortillaka 47</string>
+    <string name="btnSalir">Salir</string>
 </resources>
