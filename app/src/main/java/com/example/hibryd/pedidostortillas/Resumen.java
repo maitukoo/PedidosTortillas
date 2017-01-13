@@ -58,10 +58,10 @@ public class Resumen extends AppCompatActivity {
 
 
         //Todo lo necesario para el popup
-        layoutVentana = (LinearLayout) findViewById(R.id.linearLayo_ut);
+        layoutVentana = (LinearLayout) findViewById(R.id.linearLayout);
         inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         ViewGroup container = (ViewGroup) inflater.inflate(R.layout.avisoborrar,null);
-        ventana = new PopupWindow(container,1000,1000,true);
+        ventana = new PopupWindow(container,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT,true);
 
         //A los botones tenemos que ponerles apuntadores pero diciendole que es del CONTAINER!!
         aceptar=(Button) container.findViewById(R.id.btnAceptarBorrar);
@@ -108,7 +108,7 @@ public class Resumen extends AppCompatActivity {
         nombres.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                ventana.showAtLocation(layoutVentana,Gravity.CENTER,500,500);
+                ventana.showAtLocation(layoutVentana,Gravity.CENTER, 0, 0);
                 posicionSeleccionada=position;
                 return true;
             }
@@ -116,7 +116,7 @@ public class Resumen extends AppCompatActivity {
         cantidades.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                ventana.showAtLocation(layoutVentana,Gravity.CENTER,500,500);
+                ventana.showAtLocation(layoutVentana,Gravity.CENTER, 0, 0);
                 posicionSeleccionada=position;
                 return false;
             }
@@ -124,7 +124,7 @@ public class Resumen extends AppCompatActivity {
         preciosTotales.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                ventana.showAtLocation(layoutVentana,Gravity.CENTER,500,500);
+                ventana.showAtLocation(layoutVentana,Gravity.CENTER, 0, 0);
                 posicionSeleccionada=position;
                 return false;
             }
