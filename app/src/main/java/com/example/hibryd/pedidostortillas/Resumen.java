@@ -1,6 +1,7 @@
 package com.example.hibryd.pedidostortillas;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -184,5 +185,17 @@ public class Resumen extends AppCompatActivity {
         ((BaseAdapter) cantidades.getAdapter()).notifyDataSetChanged();
         ((BaseAdapter) preciosTotales.getAdapter()).notifyDataSetChanged();
 
+    }
+
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent intent = new Intent(Resumen.this,EligeBebida.class);
+
+        //Pasamos por parametro el array List, esto lo podemos hacer porque todas las clases que componen el ArrayList Implementan Serializable
+        intent.putExtra("array",arrayParametros);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        //Lanzamos la siguiente actividad
+        startActivity(intent);
+        finish();
     }
 }

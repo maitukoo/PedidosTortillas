@@ -294,11 +294,24 @@ public class EligeBebida extends AppCompatActivity{
 
         //Lanzamos la siguiente actividad
         startActivity(intent);
+        finish();
     }
 
     public void onResume(){
         super.onResume();
 
+    }
+
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent intent = new Intent(EligeBebida.this,EligeTortilla.class);
+
+        //Pasamos por parametro el array List, esto lo podemos hacer porque todas las clases que componen el ArrayList Implementan Serializable
+        intent.putExtra("array",arrayParametros);
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        //Lanzamos la siguiente actividad
+        startActivity(intent);
     }
 
 }

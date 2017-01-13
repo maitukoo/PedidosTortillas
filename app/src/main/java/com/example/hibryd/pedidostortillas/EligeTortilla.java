@@ -189,6 +189,7 @@ public class EligeTortilla extends AppCompatActivity {
 
         //Lanzamos la siguiente actividad
         startActivity(intent);
+        finish();
     }
 
     public double CalculaPrecioTortilla(){
