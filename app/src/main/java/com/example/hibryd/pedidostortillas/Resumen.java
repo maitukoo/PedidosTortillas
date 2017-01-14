@@ -1,8 +1,10 @@
 package com.example.hibryd.pedidostortillas;
 
 import android.app.ActionBar;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.util.Log;
@@ -16,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -51,12 +54,23 @@ public class Resumen extends AppCompatActivity {
     private Button aceptar;
     private Button cancelar;
     private Button atrasResumen;
+    private Button finalizarPedido;
     private int posicionSeleccionada;
+    private double precioTotalPedido;
+    private TextView regalo;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resumen);
+
+        Toast avisoborrar =
+                Toast.makeText(getApplicationContext(),
+                        "Recuerda que puedes borrar tus productos con una pulsacion larga!", Toast.LENGTH_LONG);
+
+        avisoborrar.setGravity(Gravity.CENTER|Gravity.CENTER,0,0);
+
+        avisoborrar.show();
 
 
         //Todo lo necesario para el popup
@@ -80,6 +94,38 @@ public class Resumen extends AppCompatActivity {
         nombres = (ListView) findViewById(R.id.lstNombres);
         cantidades = (ListView) findViewById(R.id.lstCantidades);
         preciosTotales = (ListView) findViewById(R.id.lstPreciosTotales);
+        regalo = (TextView) findViewById(R.id.txtRegalo);
+        finalizarPedido = (Button) findViewById(R.id.btnfinalizarPedido);
+
+        final AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setMessage("Gracias por realizar su pedido con nosotros! Lo recibira en su domicilio lo antes posible!");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Cerrar",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        //System.exit(0);
+                        Intent intent = new Intent(getApplicationContext(), FirstMapActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtra("EXIT", true);
+                        startActivity(intent);
+                    }
+                });
+
+
+
+
+        finalizarPedido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+
+
+            }
+        });
 
 
         //En caso de que pulse con el dedo fuera del popup se cerrara el popup.
@@ -172,6 +218,7 @@ public class Resumen extends AppCompatActivity {
         nombresA.clear();
         cantidadesA.clear();
         preciosTotalesA.clear();
+        precioTotalPedido = 0;
 
         Double precioTotal;
         for (int i = 0; i< arrayParametros.size();i++){
@@ -182,17 +229,24 @@ public class Resumen extends AppCompatActivity {
                     nombresA.add(tortilla.getTipoTortilla());
                     cantidadesA.add(String.valueOf(tortilla.getCantidad()));
                     precioTotal = tortilla.getPrecioUnitario() * tortilla.getCantidad();
-                    preciosTotalesA.add(String.valueOf(precioTotal));
+                    preciosTotalesA.add(String.valueOf(precioTotal)+" €");
+                    precioTotalPedido+=precioTotal;
                     break;
                 case "bebida":
                     bebida = (Bebida) datos.getX();
                     nombresA.add(bebida.getTipoBebida());
                     cantidadesA.add(String.valueOf(bebida.getNumeroBebidas()));
                     precioTotal = bebida.getPrecioUnitario() * bebida.getNumeroBebidas();
-                    preciosTotalesA.add(String.valueOf(precioTotal));
+                    preciosTotalesA.add(String.valueOf(precioTotal)+" €");
+                    precioTotalPedido+=precioTotal;
                     break;
                 }
             }
+        cantidadesA.add("Total: ");
+        preciosTotalesA.add(String.valueOf(precioTotalPedido)+" €");
+
+        comprobarRegalo();
+
 
 
         }
@@ -216,5 +270,16 @@ public class Resumen extends AppCompatActivity {
         //Lanzamos la siguiente actividad
         startActivity(intent);
         finish();
+    }
+
+    public void comprobarRegalo(){
+        regalo.setText("");
+        if (precioTotalPedido >= 28){
+            regalo.setText("Por superar los 28€ en tu pedido recibiras un peluche del muñeco de android y un vale para comer en Cebanc!");
+        } else if (precioTotalPedido >=18){
+            regalo.setText("Por superar los 18€ en tu pedido recibiras un peluche del muñeco de Android!");
+        }
+
+
     }
 }

@@ -34,8 +34,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:layout_height="85dp">
 
         <Button
             android:text="@string/btnSalir"
@@ -43,7 +43,7 @@
             android:layout_height="match_parent"
             android:id="@+id/btnSalirInicio"
             android:layout_weight="1"
-            style="?android:buttonBarButtonStyle"/>
+            style="@style/Widget.AppCompat.Button.Colored"/>
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -62,8 +62,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/btnInicio"
-            android:layout_weight="1"
-            style="?android:buttonBarButtonStyle"/>
+            android:layout_weight="0.25"
+            style="@style/Widget.AppCompat.Button.Colored"/>
     </LinearLayout>
 
 

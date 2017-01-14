@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:id="@+id/linearLayout">
 
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -49,28 +50,46 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="365dp">
+        android:layout_height="365dp"
+        android:scrollbars="vertical">
 
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id = "@+id/lstNombres"
             android:layout_weight="1"
-            android:longClickable="true" />
+            android:longClickable="true"
+            android:scrollbars="none"/>
 
 
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id = "@+id/lstCantidades"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:scrollbars="none"/>
 
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id = "@+id/lstPreciosTotales"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:scrollbars="none"/>
+
     </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:text=""
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/txtRegalo" />
+    </LinearLayout>
+
 
     <LinearLayout
         android:orientation="horizontal"
@@ -83,15 +102,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/btnAtrasResumen"
             android:layout_weight="1"
-            style="?android:buttonBarButtonStyle"/>
+            style="@style/Widget.AppCompat.Button.Colored"/>
 
         <Button
             android:text="@string/Finalizar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/button4"
+            android:id="@+id/btnfinalizarPedido"
             android:layout_weight="1"
-            style="?android:buttonBarButtonStyle"/>
+            style="@style/Widget.AppCompat.Button.Colored"/>
+
     </LinearLayout>
 
 </LinearLayout>

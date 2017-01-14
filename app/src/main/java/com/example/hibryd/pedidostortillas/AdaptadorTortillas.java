@@ -42,7 +42,7 @@ public class AdaptadorTortillas extends ArrayAdapter<String> {
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = inflater.inflate(R.layout.spinnerrow, parent, false);
 
-        TextView textView = (TextView) row.findViewById(R.id.NombreBebida);
+        TextView textView = (TextView) row.findViewById(R.id.NombreObjeto);
         textView.setText(nombres[position]);
 
         ImageView imageView = (ImageView)row.findViewById(R.id.icon);

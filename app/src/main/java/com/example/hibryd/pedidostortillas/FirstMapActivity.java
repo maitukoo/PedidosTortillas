@@ -38,6 +38,11 @@ public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCal
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mapa);
 
+        //Para Finalizar el programa desde la llamada del Resumen
+        if (getIntent().getBooleanExtra("EXIT", false)) {
+            finish();
+        }
+
         inicio = (Button) findViewById(R.id.btnInicio);
         llamar = (ImageButton) findViewById(R.id.btnLlamar);
         salir = (Button) findViewById(R.id.btnSalirInicio);

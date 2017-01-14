@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">Tortillaka47</string>
+    <string name="app_name">Cebanc Tortillas</string>
     <string name="Nombre">Nombre:</string>
     <string name="IntNombre">Introduce tu nombre</string>
     <string name="Direccion">Dirección:</string>
     <string name="Telefono">Telefono:</string>
     <string name="IntTelefono">Introduce tu teléfono</string>
     <string name="IntDireccion">Introduce tu dirección</string>
-    <string name="Titulo">Pide Tortillas!</string>
+    <string name="Titulo">Introduce tus Datos!</string>
     <string name="Salir">Salir</string>
     <string name="Siguiente">Siguiente</string>
     <string name="aniadir">Añadir</string>
@@ -35,12 +35,12 @@
     <string name="precio">Precio en €:</string>
     <string name="Borrar">Borrar</string>
     <string name="Finalizar">Finalizar Pedido</string>
-    <string name="btnInicio">Inicio</string>
+    <string name="btnInicio">Haz Tu Pedido</string>
     <string name="btnInfo">Info</string>
     <string name="btnLlamar">Llamar</string>
-    <string name="Tortillaka47">Tortillaka 47</string>
+    <string name="Tortillaka47">Cebanc Tortillas</string>
     <string name="btnSalir">Salir</string>
-    <string name="aviso">¿Desea borrar la fila seleccionada?</string>
+    <string name="aviso">¿Desea borrar el producto seleccionado?</string>
     <string name="cancelar">Cancelar</string>
     <string name="aceptar">Aceptar</string>
     <string name="precioTotal">Precio Total</string>

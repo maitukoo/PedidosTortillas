@@ -9,7 +9,7 @@
         android:layout_height="60dp"
         android:src="@drawable/cola"/>
     <TextView
-        android:id="@+id/NombreBebida"
+        android:id="@+id/NombreObjeto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="37sp"/>

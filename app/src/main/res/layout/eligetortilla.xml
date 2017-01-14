@@ -33,7 +33,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/cmbTamanio"
             android:layout_weight="1"
-            android:background="@drawable/bordespinner"
             android:dropDownSelector="@color/blue"/>
     </LinearLayout>
 
@@ -107,7 +106,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btnAniadirTortilla"
             android:layout_weight="1"
-            style="?android:buttonBarButtonStyle"/>
+            style="@style/Widget.AppCompat.Button.Colored"/>
 
     </LinearLayout>
 
@@ -124,7 +123,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btnAtrasTortilla"
             android:layout_weight="1"
-            style="?android:buttonBarButtonStyle"/>
+            style="@style/Widget.AppCompat.Button.Colored"/>
 
         <Button
             android:text="@string/Siguiente"
@@ -132,7 +131,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btnSiguienteTortillas"
             android:layout_weight="1"
-            style="?android:buttonBarButtonStyle"/>
+            style="@style/Widget.AppCompat.Button.Colored"/>
     </LinearLayout>
 
 </LinearLayout>

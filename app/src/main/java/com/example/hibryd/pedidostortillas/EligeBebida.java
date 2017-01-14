@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -92,6 +93,10 @@ public class EligeBebida extends AppCompatActivity{
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (checkCola.isChecked()) {
                     cantidadCola.setEnabled(true);
+                    //Ponemos el foco en la caja de texto para escribir la cantidad
+                    cantidadCola.requestFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(EligeBebida.this.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                 } else {
                     cantidades[0] = 0;
                     cantidadCola.setText("");
@@ -105,6 +110,10 @@ public class EligeBebida extends AppCompatActivity{
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (checkLimon.isChecked()) {
                     cantidadLimon.setEnabled(true);
+                    //Ponemos el foco en la caja de texto para escribir la cantidad
+                    cantidadLimon.requestFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(EligeBebida.this.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                 } else {
                     cantidades[1] = 0;
                     cantidadLimon.setText("");
@@ -119,6 +128,10 @@ public class EligeBebida extends AppCompatActivity{
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (checkNaranja.isChecked()) {
                     cantidadNaranja.setEnabled(true);
+                    //Ponemos el foco en la caja de texto para escribir la cantidad
+                    cantidadNaranja.requestFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(EligeBebida.this.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                 } else {
                     cantidades[2] = 0;
                     cantidadNaranja.setText("");
@@ -133,6 +146,10 @@ public class EligeBebida extends AppCompatActivity{
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (checkNestea.isChecked()) {
                     cantidadNestea.setEnabled(true);
+                    //Ponemos el foco en la caja de texto para escribir la cantidad
+                    cantidadNestea.requestFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(EligeBebida.this.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                 } else {
                     cantidades[3] = 0;
                     cantidadNestea.setText("");
@@ -147,6 +164,10 @@ public class EligeBebida extends AppCompatActivity{
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (checkCerveza.isChecked()) {
                     cantidadCerveza.setEnabled(true);
+                    //Ponemos el foco en la caja de texto para escribir la cantidad
+                    cantidadCerveza.requestFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(EligeBebida.this.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                 } else {
                     cantidades[4] = 0;
                     cantidadCerveza.setText("");
@@ -159,7 +180,11 @@ public class EligeBebida extends AppCompatActivity{
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (checkAgua.isChecked()) {
-                        cantidadAgua.setEnabled(true);
+                    cantidadAgua.setEnabled(true);
+                    //Ponemos el foco en la caja de texto para escribir la cantidad
+                    cantidadAgua.requestFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(EligeBebida.this.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                     } else {
                         cantidades[5] = 0;
                     cantidadAgua.setText("");

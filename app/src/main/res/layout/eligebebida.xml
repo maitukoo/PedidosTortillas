@@ -174,7 +174,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btnSiguiente3"
             android:layout_weight="1"
-            style="?android:buttonBarButtonStyle"/>
+            style="@style/Widget.AppCompat.Button.Colored"/>
     </LinearLayout>
 
 </LinearLayout>

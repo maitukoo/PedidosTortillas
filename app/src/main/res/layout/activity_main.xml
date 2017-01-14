@@ -14,7 +14,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="72dp">
+        android:layout_height="wrap_content">
 
         <TextView
             android:text="@string/Titulo"
@@ -108,8 +108,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/btnAtras1"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            style="?android:buttonBarButtonStyle"/>
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_marginTop="10dp" />
 
         <Button
             android:text="@string/Siguiente"
@@ -117,7 +117,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/SiguienteDatos"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            style="?android:buttonBarButtonStyle"/>
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_marginTop="10dp"
+            android:elevation="9dp" />
     </LinearLayout>
 </LinearLayout>

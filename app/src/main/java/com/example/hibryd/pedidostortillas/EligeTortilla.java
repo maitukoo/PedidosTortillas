@@ -1,6 +1,7 @@
 package com.example.hibryd.pedidostortillas;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -143,124 +145,124 @@ public class EligeTortilla extends AppCompatActivity {
                     switch (tortillaElegida){
                         case 0:
                             if (comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() == 0) {
-                                tipoTortilla = "TPatata";
+                                tipoTortilla = "T.Patata";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==0 ) {
-                                tipoTortilla = "TPatata +fam";
+                                tipoTortilla = "T.Patata +fam";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() ==1 ) {
-                                tipoTortilla = "TPatata +camp";
+                                tipoTortilla = "T.Patata +camp";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() ==2 ) {
-                                tipoTortilla = "TPatata +eco";
+                                tipoTortilla = "T.Patata +eco";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==1 ) {
-                                tipoTortilla = "TPatata +fam +camp";
+                                tipoTortilla = "T.Patata +fam +camp";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==2 ) {
-                                tipoTortilla = "TPatata +fam +eco";
+                                tipoTortilla = "T.Patata +fam +eco";
                             }
                             break;
 
                         case 1:
                             if (comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() == 0) {
-                                tipoTortilla = "TVerduras";
+                                tipoTortilla = "T.Verduras";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==0 ) {
-                                tipoTortilla = "TVerduras +fam";
+                                tipoTortilla = "T.Verduras +fam";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() ==1 ) {
-                                tipoTortilla = "TVerduras +camp";
+                                tipoTortilla = "T.Verduras +camp";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() ==2 ) {
-                                tipoTortilla = "TVerduras +eco";
+                                tipoTortilla = "T.Verduras +eco";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==1 ) {
-                                tipoTortilla = "TVerduras +fam +camp";
+                                tipoTortilla = "T.Verduras +fam +camp";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==2 ) {
-                                tipoTortilla = "TVerduras +fam +eco";
+                                tipoTortilla = "T.Verduras +fam +eco";
                             }
                             break;
 
                         case 2:
                             if (comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() == 0) {
-                                tipoTortilla = "TBacalao";
+                                tipoTortilla = "T.Bacalao";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==0 ) {
-                                tipoTortilla = "TBacalao +fam";
+                                tipoTortilla = "T.Bacalao +fam";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() ==1 ) {
-                                tipoTortilla = "TBacalao +camp";
+                                tipoTortilla = "T.Bacalao +camp";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() ==2 ) {
-                                tipoTortilla = "TBacalao +eco";
+                                tipoTortilla = "T.Bacalao +eco";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==1 ) {
-                                tipoTortilla = "TBacalao +fam +camp";
+                                tipoTortilla = "T.Bacalao +fam +camp";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==2 ) {
-                                tipoTortilla = "TBacalao +fam +eco";
+                                tipoTortilla = "T.Bacalao +fam +eco";
                             }
                             break;
                         case 3:
                             if (comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() == 0) {
-                                tipoTortilla = "TJamon";
+                                tipoTortilla = "T.Jamon";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==0 ) {
-                                tipoTortilla = "TJamon +fam";
+                                tipoTortilla = "T.Jamon +fam";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() ==1 ) {
-                                tipoTortilla = "TJamon +camp";
+                                tipoTortilla = "T.Jamon +camp";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() ==2 ) {
-                                tipoTortilla = "TJamon +eco";
+                                tipoTortilla = "T.Jamon +eco";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==1 ) {
-                                tipoTortilla = "TJamon +fam +camp";
+                                tipoTortilla = "T.Jamon +fam +camp";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==2 ) {
-                                tipoTortilla = "TJamon +fam +eco";
+                                tipoTortilla = "T.Jamon +fam +eco";
                             }
                             break;
                         case 4:
                             if (comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() == 0) {
-                                tipoTortilla = "TQuesoIdi";
+                                tipoTortilla = "T.QuesoIdi";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==0 ) {
-                                tipoTortilla = "TQuesoIdi +fam";
+                                tipoTortilla = "T.QuesoIdi +fam";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() ==1 ) {
-                                tipoTortilla = "TQuesoIdi +camp";
+                                tipoTortilla = "T.QuesoIdi +camp";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() ==2 ) {
-                                tipoTortilla = "TQuesoIdi +eco";
+                                tipoTortilla = "T.QuesoIdi +eco";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==1 ) {
-                                tipoTortilla = "TQuesoIdi +fam +camp";
+                                tipoTortilla = "T.QuesoIdi +fam +camp";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==2 ) {
-                                tipoTortilla = "TQuesoIdi +fam +eco";
+                                tipoTortilla = "T.QuesoIdi +fam +eco";
                             }
                             break;
                         case 5:
                             if (comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() == 0) {
-                                tipoTortilla = "THongos";
+                                tipoTortilla = "T.Hongos";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==0 ) {
-                                tipoTortilla = "THongos +fam";
+                                tipoTortilla = "T.Hongos +fam";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() ==1 ) {
-                                tipoTortilla = "THongos +camp";
+                                tipoTortilla = "T.Hongos +camp";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() ==2 ) {
-                                tipoTortilla = "THongos +eco";
+                                tipoTortilla = "T.Hongos +eco";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==1 ) {
-                                tipoTortilla = "THongos +fam +camp";
+                                tipoTortilla = "T.Hongos +fam +camp";
                             }
                             else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==2 ) {
-                                tipoTortilla = "THongos +fam +eco";
+                                tipoTortilla = "T.Hongos +fam +eco";
                             }
                             break;
                     }
@@ -285,6 +287,10 @@ public class EligeTortilla extends AppCompatActivity {
                     arrayParametros.add(datos);
                     cont++;
                     alertaAniadidoExito.show();
+
+                    //Ocultar Teclado
+                    InputMethodManager ocultarTeclado = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    ocultarTeclado.hideSoftInputFromWindow(cantidadTortilla.getWindowToken(), 0);
 
                 }
 
