@@ -90,6 +90,14 @@ public class EligeTortilla extends AppCompatActivity {
 
         siguiente=(Button) findViewById(R.id.btnSiguienteTortillas);
 
+        container.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                ventana.dismiss();
+                return false;
+            }
+        });
+
         comboTamanio = (Spinner) findViewById(R.id.cmbTamanio);
         ArrayAdapter<CharSequence> adaptadorTamanio = ArrayAdapter.createFromResource(this,R.array.Tamanios,android.R.layout.simple_spinner_item);
         adaptadorTamanio.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

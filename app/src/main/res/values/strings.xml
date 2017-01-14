@@ -45,4 +45,6 @@
     <string name="aceptar">Aceptar</string>
     <string name="precioTotal">Precio Total</string>
     <string name="CancelarPedido">¿Estas seguro que desea volver a la pestaña anterior y cancelar el pedido?</string>
+    <string name="compraFinalizada">¡Se ha finalizado la compra con exito!</string>
+    <string name="seEstaFinalizando">Se esta finalizando el pedido...</string>
 </resources>

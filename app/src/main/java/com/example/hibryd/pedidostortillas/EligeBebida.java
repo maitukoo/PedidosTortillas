@@ -29,6 +29,7 @@ public class EligeBebida extends AppCompatActivity{
     private Bebida bebida;
     private Datos datos;
     private Button botonSiguinte;
+    private Button botonAtras;
     private double precioTotalBebidas = 0;
     private TextView precioTotal;
     private CheckBox checkCola;
@@ -66,6 +67,7 @@ public class EligeBebida extends AppCompatActivity{
         cantidadCerveza = (EditText) findViewById(R.id.txtCantidadCerveza);
         cantidadAgua = (EditText) findViewById(R.id.txtCantidadAgua);
         precioTotal=(TextView)findViewById(R.id.lblPrecioTotal);
+        botonAtras=(Button) findViewById(R.id.btnAtras3);
 
         //Los ponemos en disabled para que no pueda meter ningun valor hasta que selecione alguna bebida.
         cantidadCola.setEnabled(false);
@@ -76,9 +78,6 @@ public class EligeBebida extends AppCompatActivity{
         cantidadAgua.setEnabled(false);
 
 
-        //Ponemos los listeners para todos los checkBox para que cuando esten checkeados sea posible
-        //cambiar el valor de la canitdad.
-
         botonSiguinte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,8 +85,24 @@ public class EligeBebida extends AppCompatActivity{
             }
         });
 
+        botonAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EligeBebida.this,EligeTortilla.class);
+
+                //Pasamos por parametro el array List, esto lo podemos hacer porque todas las clases que componen el ArrayList Implementan Serializable
+                intent.putExtra("array",arrayParametros);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                //Lanzamos la siguiente actividad
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
+
+        //Ponemos los listeners para todos los checkBox para que cuando esten checkeados sea posible
+        //cambiar el valor de la canitdad.
         checkCola.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

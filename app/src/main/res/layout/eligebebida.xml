@@ -175,6 +175,22 @@
             android:id="@+id/btnSiguiente3"
             android:layout_weight="1"
             style="@style/Widget.AppCompat.Button.Colored"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp">
+
+        <Button
+            android:text="@string/Atras"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnAtras3"
+            android:layout_weight="1"
+            style="@style/Widget.AppCompat.Button.Colored"/>
     </LinearLayout>
 
 </LinearLayout>

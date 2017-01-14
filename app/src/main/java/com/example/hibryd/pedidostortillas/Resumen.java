@@ -66,7 +66,7 @@ public class Resumen extends AppCompatActivity {
 
         Toast avisoborrar =
                 Toast.makeText(getApplicationContext(),
-                        "Recuerda que puedes borrar tus productos con una pulsacion larga!", Toast.LENGTH_LONG);
+                        "Recuerda que puedes borrar tus productos con una pulsacion larga sobre el CONCEPTO!", Toast.LENGTH_LONG);
 
         avisoborrar.setGravity(Gravity.CENTER|Gravity.CENTER,0,0);
 
@@ -120,8 +120,13 @@ public class Resumen extends AppCompatActivity {
         finalizarPedido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog alert11 = builder1.create();
-                alert11.show();
+                if (arrayParametros.size()>1) {
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                }
+                else{
+                    Toast.makeText(Resumen.this, "No puedes realizar un pedido vacio!", Toast.LENGTH_SHORT).show();
+                }
 
 
             }
@@ -176,22 +181,6 @@ public class Resumen extends AppCompatActivity {
                 ventana.showAtLocation(layoutVentana,Gravity.CENTER, 0, 0);
                 posicionSeleccionada=position;
                 return true;
-            }
-        });
-        cantidades.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                ventana.showAtLocation(layoutVentana,Gravity.CENTER, 0, 0);
-                posicionSeleccionada=position;
-                return false;
-            }
-        });
-        preciosTotales.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                ventana.showAtLocation(layoutVentana,Gravity.CENTER, 0, 0);
-                posicionSeleccionada=position;
-                return false;
             }
         });
 
