@@ -62,6 +62,8 @@ public class EligeTortilla extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.eligetortilla);
 
+
+
         atras=(Button) findViewById(R.id.btnAtrasTortilla);
         aniadir=(Button) findViewById(R.id.btnAniadirTortilla);
         cantidadTortilla = (EditText) findViewById(R.id.txtcantidadTortilla);

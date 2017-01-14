@@ -6,132 +6,153 @@
     android:orientation="vertical"
     android:id="@+id/layoutTortillas">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/Saludo"
-        android:layout_weight="1"
-        android:textSize="25sp"/>
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
-    <TextView
-        android:text="@string/tamanio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtTamanio"
-        android:layout_weight="1"
-        android:textSize="20sp"
-        android:layout_marginTop="20dp"/>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="27dp"
-        android:layout_margin="10dp">
-
-        <Spinner
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/cmbTamanio"
-            android:layout_weight="1"
-            android:dropDownSelector="@color/blue"/>
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <TextView
-        android:text="@string/TipoHuevo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtTipoHuevo"
-        android:layout_weight="1"
-        android:textSize="20sp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/Saludo"
+                android:layout_weight="1"
+                android:textSize="25sp"/>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:layout_margin="10dp">
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/cmbTipoHuevo"
-            android:layout_weight="1"/>
-    </LinearLayout>
 
-    <TextView
-        android:text="@string/VariedadTortilla"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtVariedadTortilla"
-        android:layout_weight="1"
-        android:textSize="20sp"/>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+            <TextView
+                android:text="@string/tamanio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtTamanio"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                android:layout_marginTop="20dp"/>
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/cmbTipoTortilla"
-            android:layout_weight="1" />
-    </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="27dp"
+                android:layout_margin="10dp">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cmbTamanio"
+                    android:layout_weight="1"
+                    android:dropDownSelector="@color/blue"/>
+            </LinearLayout>
 
-        <TextView
-            android:text="@string/cantidad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView"
-            android:layout_weight="1"
-            android:textSize="15dp"/>
+            <TextView
+                android:text="@string/TipoHuevo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtTipoHuevo"
+                android:layout_weight="1"
+                android:textSize="20sp"/>
 
-        <EditText
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="10"
-            android:layout_weight="1"
-            android:id="@+id/txtcantidadTortilla" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_margin="10dp">
 
-        <Button
-            android:text="@string/aniadir"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnAniadirTortilla"
-            android:layout_weight="1"
-            style="@style/Widget.AppCompat.Button.Colored"/>
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cmbTipoHuevo"
+                    android:layout_weight="1"/>
+            </LinearLayout>
 
-    </LinearLayout>
+            <TextView
+                android:text="@string/VariedadTortilla"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtVariedadTortilla"
+                android:layout_weight="1"
+                android:textSize="20sp"/>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginTop="50dp">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
 
-        <Button
-            android:text="@string/Atras"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnAtrasTortilla"
-            android:layout_weight="1"
-            style="@style/Widget.AppCompat.Button.Colored"/>
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cmbTipoTortilla"
+                    android:layout_weight="1" />
+            </LinearLayout>
 
-        <Button
-            android:text="@string/Siguiente"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnSiguienteTortillas"
-            android:layout_weight="1"
-            style="@style/Widget.AppCompat.Button.Colored"/>
-    </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:text="@string/cantidad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView"
+                    android:layout_weight="1"
+                    android:textSize="15dp"/>
+
+                <EditText
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:layout_weight="1"
+                    android:id="@+id/txtcantidadTortilla" />
+
+                <Button
+                    android:text="@string/aniadir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnAniadirTortilla"
+                    android:layout_weight="1"
+                    style="@style/Widget.AppCompat.Button.Colored"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="50dp">
+
+                <Button
+                    android:text="@string/Atras"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnAtrasTortilla"
+                    android:layout_weight="1"
+                    style="@style/Widget.AppCompat.Button.Colored"/>
+
+                <Button
+                    android:text="@string/Siguiente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnSiguienteTortillas"
+                    android:layout_weight="1"
+                    style="@style/Widget.AppCompat.Button.Colored"/>
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
 
 </LinearLayout>

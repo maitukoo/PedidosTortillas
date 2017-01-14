@@ -52,6 +52,9 @@ public class EligeBebida extends AppCompatActivity{
         Bundle bnd = getIntent().getExtras();
         arrayParametros = (ArrayList<Datos>) bnd.getSerializable("array");
 
+        InputMethodManager imm = (InputMethodManager) getSystemService(EligeBebida.this.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+
         //Enlazamos los objetos a las vistas
         botonSiguinte = (Button) findViewById(R.id.btnSiguiente3);
         checkCola = (CheckBox) findViewById(R.id.ckbCola);
