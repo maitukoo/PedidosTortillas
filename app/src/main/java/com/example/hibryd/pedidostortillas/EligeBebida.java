@@ -297,11 +297,6 @@ public class EligeBebida extends AppCompatActivity{
         finish();
     }
 
-    public void onResume(){
-        super.onResume();
-
-    }
-
     public void onBackPressed(){
         super.onBackPressed();
         Intent intent = new Intent(EligeBebida.this,EligeTortilla.class);

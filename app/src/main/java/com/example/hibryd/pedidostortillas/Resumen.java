@@ -50,6 +50,7 @@ public class Resumen extends AppCompatActivity {
     private LinearLayout layoutVentana;
     private Button aceptar;
     private Button cancelar;
+    private Button atrasResumen;
     private int posicionSeleccionada;
 
 
@@ -61,26 +62,28 @@ public class Resumen extends AppCompatActivity {
         //Todo lo necesario para el popup
         layoutVentana = (LinearLayout) findViewById(R.id.linearLayout);
         inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-        ViewGroup container = (ViewGroup) inflater.inflate(R.layout.avisoborrar,null);
-        ventana = new PopupWindow(container,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT,true);
+        ViewGroup contenedor = (ViewGroup) inflater.inflate(R.layout.avisoborrar,null);
+        ventana = new PopupWindow(contenedor,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT,true);
 
-        //A los botones tenemos que ponerles apuntadores pero diciendole que es del CONTAINER!!
-        aceptar=(Button) container.findViewById(R.id.btnAceptarBorrar);
-        cancelar=(Button) container.findViewById(R.id.btnCancelarBorrar);
+        //A los botones del poup tenemos que ponerles apuntadores pero diciendole que es del CONTAINER!!
+        aceptar=(Button) contenedor.findViewById(R.id.btnAceptarBorrar);
+        cancelar=(Button) contenedor.findViewById(R.id.btnCancelarBorrar);
+
+        atrasResumen = (Button) findViewById(R.id.btnAtrasResumen);
 
         //Recogida de datos del arraylist
         Bundle bnd = getIntent().getExtras();
         arrayParametros = (ArrayList<Datos>) bnd.getSerializable("array");
 
 
-        //Apuntadores a los listview
+        //Apuntadores a los listview y precio total
         nombres = (ListView) findViewById(R.id.lstNombres);
         cantidades = (ListView) findViewById(R.id.lstCantidades);
         preciosTotales = (ListView) findViewById(R.id.lstPreciosTotales);
 
 
         //En caso de que pulse con el dedo fuera del popup se cerrara el popup.
-        container.setOnTouchListener(new View.OnTouchListener() {
+        contenedor.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 ventana.dismiss();
@@ -102,6 +105,21 @@ public class Resumen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ventana.dismiss();
+            }
+        });
+
+        //Al darle atras podemos cerrar esta actividad ya que cuando le de a siguiente en bebidas hara de nuevo un onCreate
+        atrasResumen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Resumen.this,EligeBebida.class);
+
+                //Pasamos por parametro el array List, esto lo podemos hacer porque todas las clases que componen el ArrayList Implementan Serializable
+                intent.putExtra("array",arrayParametros);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                //Lanzamos la siguiente actividad
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -146,6 +164,7 @@ public class Resumen extends AppCompatActivity {
         nombres.setAdapter(adaptadornombres);
         cantidades.setAdapter(adaptadorcantidad);
         preciosTotales.setAdapter(adaptadorprecio);
+
 
     }
 

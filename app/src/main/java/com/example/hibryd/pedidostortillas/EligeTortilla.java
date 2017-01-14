@@ -5,14 +5,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +46,11 @@ public class EligeTortilla extends AppCompatActivity {
     private EditText cantidadTortilla;
     Spinner spinnerTortillas;
     private Toast alertaCantidad;
+    private PopupWindow ventana;
+    private LayoutInflater inflater;
+    private LinearLayout layoutVentana;
+    private Button aceptar;
+    private Button cancelar;
     private Toast alertaSiguiente;
     private Toast alertaAniadidoExito;
     private int cont;
@@ -58,6 +67,16 @@ public class EligeTortilla extends AppCompatActivity {
         alertaSiguiente = Toast.makeText(this,"Tienes que añadir alguna tortilla al carrito",Toast.LENGTH_SHORT);
         alertaAniadidoExito=Toast.makeText(this,"Tortilla añadida con exito", Toast.LENGTH_SHORT);
         saludo = (TextView) findViewById(R.id.Saludo);
+
+        //Todo lo necesario para el popup
+        layoutVentana = (LinearLayout) findViewById(R.id.layoutTortillas);
+        inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        ViewGroup container = (ViewGroup) inflater.inflate(R.layout.cancelarpedido,null);
+        ventana = new PopupWindow(container,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT,true);
+
+        //A los botones del poup tenemos que ponerles apuntadores pero diciendole que es del CONTAINER!!
+        aceptar=(Button) container.findViewById(R.id.btnSiCancelarPedido);
+        cancelar=(Button) container.findViewById(R.id.btnNoCancelarPedido);
 
         //Recogemos los valores de la primera actividad para poder saludar al usuario
         Bundle bnd = getIntent().getExtras();
@@ -83,6 +102,31 @@ public class EligeTortilla extends AppCompatActivity {
         AdaptadorTortillas adapter = new AdaptadorTortillas(this,nombre,imageId);
         spinnerTortillas.setAdapter(adapter);
 
+        container.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                ventana.dismiss();
+                return false;
+            }
+        });
+
+        aceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                arrayParametros.clear();
+                ventana.dismiss();
+                finish();
+            }
+        });
+
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ventana.dismiss();
+            }
+        });
+
         //Listener del boton añadir
         aniadir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,22 +142,126 @@ public class EligeTortilla extends AppCompatActivity {
                     String tipoTortilla = "";
                     switch (tortillaElegida){
                         case 0:
-                            tipoTortilla = "Patata";
+                            if (comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() == 0) {
+                                tipoTortilla = "TPatata";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==0 ) {
+                                tipoTortilla = "TPatata +fam";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() ==1 ) {
+                                tipoTortilla = "TPatata +camp";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() ==2 ) {
+                                tipoTortilla = "TPatata +eco";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==1 ) {
+                                tipoTortilla = "TPatata +fam +camp";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==2 ) {
+                                tipoTortilla = "TPatata +fam +eco";
+                            }
                             break;
+
                         case 1:
-                            tipoTortilla = "Verduras";
+                            if (comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() == 0) {
+                                tipoTortilla = "TVerduras";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==0 ) {
+                                tipoTortilla = "TVerduras +fam";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() ==1 ) {
+                                tipoTortilla = "TVerduras +camp";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() ==2 ) {
+                                tipoTortilla = "TVerduras +eco";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==1 ) {
+                                tipoTortilla = "TVerduras +fam +camp";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==2 ) {
+                                tipoTortilla = "TVerduras +fam +eco";
+                            }
                             break;
+
                         case 2:
-                            tipoTortilla = "Bacalao";
+                            if (comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() == 0) {
+                                tipoTortilla = "TBacalao";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==0 ) {
+                                tipoTortilla = "TBacalao +fam";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() ==1 ) {
+                                tipoTortilla = "TBacalao +camp";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() ==2 ) {
+                                tipoTortilla = "TBacalao +eco";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==1 ) {
+                                tipoTortilla = "TBacalao +fam +camp";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==2 ) {
+                                tipoTortilla = "TBacalao +fam +eco";
+                            }
                             break;
                         case 3:
-                            tipoTortilla = "Jamon";
+                            if (comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() == 0) {
+                                tipoTortilla = "TJamon";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==0 ) {
+                                tipoTortilla = "TJamon +fam";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() ==1 ) {
+                                tipoTortilla = "TJamon +camp";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() ==2 ) {
+                                tipoTortilla = "TJamon +eco";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==1 ) {
+                                tipoTortilla = "TJamon +fam +camp";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==2 ) {
+                                tipoTortilla = "TJamon +fam +eco";
+                            }
                             break;
                         case 4:
-                            tipoTortilla = "Queso Idiazabal";
+                            if (comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() == 0) {
+                                tipoTortilla = "TQuesoIdi";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==0 ) {
+                                tipoTortilla = "TQuesoIdi +fam";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() ==1 ) {
+                                tipoTortilla = "TQuesoIdi +camp";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() ==2 ) {
+                                tipoTortilla = "TQuesoIdi +eco";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==1 ) {
+                                tipoTortilla = "TQuesoIdi +fam +camp";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==2 ) {
+                                tipoTortilla = "TQuesoIdi +fam +eco";
+                            }
                             break;
                         case 5:
-                            tipoTortilla = "Hongos";
+                            if (comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() == 0) {
+                                tipoTortilla = "THongos";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==0 ) {
+                                tipoTortilla = "THongos +fam";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() ==1 ) {
+                                tipoTortilla = "THongos +camp";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==0 && comboTipoHuevo.getSelectedItemPosition() ==2 ) {
+                                tipoTortilla = "THongos +eco";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==1 ) {
+                                tipoTortilla = "THongos +fam +camp";
+                            }
+                            else if(comboTamanio.getSelectedItemPosition()==1 && comboTipoHuevo.getSelectedItemPosition() ==2 ) {
+                                tipoTortilla = "THongos +fam +eco";
+                            }
                             break;
                     }
 
@@ -144,16 +292,10 @@ public class EligeTortilla extends AppCompatActivity {
         });
 
         //Listener del boton atras
-        //En caso de que haya añadido alguna tortilla al arraylist, tenemos que borrarla
         atras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cont > 0){
-                    arrayParametros.clear();
-                    //Ponemos el contador de las tortillas añadidas a cero otra vez porque hemos borrado las tortillas
-                    cont=0;
-                }
-                finish();
+                ventana.showAtLocation(layoutVentana, Gravity.CENTER, 0, 0);
             }
         });
 
@@ -162,7 +304,7 @@ public class EligeTortilla extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(cont != 0) {
+                if(arrayParametros.size()>1) {
 
                     LanzarActividad();
                 }
@@ -176,7 +318,7 @@ public class EligeTortilla extends AppCompatActivity {
     public void Saludar(){
         String nombre;
         nombre = cliente.getNombre();
-        saludo.setText("Buenas " + nombre + ", que deseas para tu pedido?");
+        saludo.setText("Buenas " + nombre + ". ¿Que deseas para tu pedido?");
     }
 
 
@@ -230,6 +372,16 @@ public class EligeTortilla extends AppCompatActivity {
         }
         return precioTortilla;
 
+    }
+
+
+    //En caso de que presione el boton de atras del movil tenemos que borrar el arraylist.
+    //Si muestro en la pantalla la alerta directamente la cierra y no da tiempo alegir la opcion
+    //porque directamente se va a la actividad anterior, entonces borramos el arraylist y yasta.
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        arrayParametros.clear();
 
     }
 

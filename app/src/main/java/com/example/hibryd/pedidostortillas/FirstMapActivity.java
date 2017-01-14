@@ -16,8 +16,9 @@ import android.support.v7.app.AppCompatActivity;
         import android.support.v7.app.AppCompatActivity;
         import android.view.View;
         import android.widget.Button;
+import android.widget.ImageButton;
 
-        import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.CameraUpdateFactory;
         import com.google.android.gms.maps.GoogleMap;
         import com.google.android.gms.maps.OnMapReadyCallback;
         import com.google.android.gms.maps.model.CameraPosition;
@@ -29,7 +30,8 @@ public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCal
 
     private FirstMapFragment mFirstMapFragment;
     private Button inicio;
-    private Button llamar;
+    private ImageButton llamar;
+    private Button salir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +39,15 @@ public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCal
         setContentView(R.layout.mapa);
 
         inicio = (Button) findViewById(R.id.btnInicio);
-        llamar = (Button) findViewById(R.id.btnLlamar);
+        llamar = (ImageButton) findViewById(R.id.btnLlamar);
+        salir = (Button) findViewById(R.id.btnSalirInicio);
 
+        salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.exit(0);
+            }
+        });
 
         mFirstMapFragment = FirstMapFragment.newInstance();
         getSupportFragmentManager()

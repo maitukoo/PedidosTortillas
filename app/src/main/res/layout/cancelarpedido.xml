@@ -5,34 +5,33 @@
     android:background="@color/dark">
 
     <TextView
-        android:text="@string/aviso"
+        android:text="@string/CancelarPedido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtAviso"
-        android:gravity="center"
-        android:textColor="@color/white"/>
+        android:id="@+id/textView2"
+        android:textColor="@color/white"
+        android:gravity="center"/>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <Button
             android:text="@string/cancelar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btnCancelarBorrar"
+            android:id="@+id/btnNoCancelarPedido"
             android:layout_weight="1"
-            style="?android:buttonBarButtonStyle"/>
+            style="?android:buttonBarButtonStyle" />
 
         <Button
             android:text="@string/aceptar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btnAceptarBorrar"
+            android:id="@+id/btnSiCancelarPedido"
             android:layout_weight="1"
-            style="?android:buttonBarButtonStyle"/>
-
+            style="?android:buttonBarButtonStyle" />
     </LinearLayout>
 
 </LinearLayout>

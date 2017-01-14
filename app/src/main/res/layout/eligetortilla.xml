@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/layoutTortillas">
 
     <TextView
         android:layout_width="match_parent"
@@ -18,7 +19,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/txtTamanio"
         android:layout_weight="1"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"/>
 
     <LinearLayout
         android:orientation="horizontal"

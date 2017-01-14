@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -39,23 +40,27 @@
         <Button
             android:text="@string/btnSalir"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/btnSalirInicio"
             android:layout_weight="1"
             style="?android:buttonBarButtonStyle"/>
 
-        <Button
-            android:text="@string/btnLlamar"
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btnLlamar"
-            android:layout_weight="1"
-            style="?android:buttonBarButtonStyle"/>
+            android:src="@drawable/telefono"
+            android:layout_centerHorizontal="true"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
+            android:layout_below="@+id/hlTopBar"
+            android:background="#00000000"
+            android:scaleType="fitXY" />
 
         <Button
             android:text="@string/btnInicio"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/btnInicio"
             android:layout_weight="1"
             style="?android:buttonBarButtonStyle"/>

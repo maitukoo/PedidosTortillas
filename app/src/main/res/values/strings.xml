@@ -32,7 +32,7 @@
     <string name="Resumen">Resumen del pedido</string>
     <string name="bebidas">¿Que bebidas deseas tomar?</string>
     <string name="Concepto">Concepto:</string>
-    <string name="precio">Precio:</string>
+    <string name="precio">Precio en €:</string>
     <string name="Borrar">Borrar</string>
     <string name="Finalizar">Finalizar Pedido</string>
     <string name="btnInicio">Inicio</string>
@@ -43,4 +43,6 @@
     <string name="aviso">¿Desea borrar la fila seleccionada?</string>
     <string name="cancelar">Cancelar</string>
     <string name="aceptar">Aceptar</string>
+    <string name="precioTotal">Precio Total</string>
+    <string name="CancelarPedido">¿Estas seguro que desea volver a la pestaña anterior y cancelar el pedido?</string>
 </resources>
