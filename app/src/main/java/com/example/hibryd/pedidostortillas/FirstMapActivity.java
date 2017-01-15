@@ -35,7 +35,7 @@ public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCal
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(null);
         setContentView(R.layout.mapa);
 
         //Para Finalizar el programa desde la llamada del Resumen
