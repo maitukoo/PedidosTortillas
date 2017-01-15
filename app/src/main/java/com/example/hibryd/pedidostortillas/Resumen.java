@@ -60,6 +60,7 @@ public class Resumen extends AppCompatActivity {
     private TextView regalo;
 
 
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resumen);
@@ -199,8 +200,6 @@ public class Resumen extends AppCompatActivity {
         nombres.setAdapter(adaptadornombres);
         cantidades.setAdapter(adaptadorcantidad);
         preciosTotales.setAdapter(adaptadorprecio);
-
-
     }
 
     public void DesglosarPedido(){
@@ -236,8 +235,6 @@ public class Resumen extends AppCompatActivity {
 
         comprobarRegalo();
 
-
-
         }
     //Metodo para borrar los datos;
     public void borrarDatosArray(int pos){
@@ -271,4 +268,5 @@ public class Resumen extends AppCompatActivity {
 
 
     }
+
 }

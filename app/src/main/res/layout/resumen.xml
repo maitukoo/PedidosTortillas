@@ -10,7 +10,7 @@
         android:layout_weight="1">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -39,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/concepto"
-                    android:layout_weight="1" />
+                    android:layout_weight="3" />
 
 
 
@@ -68,7 +68,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:id = "@+id/lstNombres"
-                    android:layout_weight="1"
+                    android:layout_weight="0.8"
                     android:longClickable="true"
                     android:scrollbars="none"/>
 
