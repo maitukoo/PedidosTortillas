@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -71,6 +72,8 @@ public class EligeTortilla extends AppCompatActivity {
         alertaSiguiente = Toast.makeText(this,"Tienes que añadir alguna tortilla al carrito",Toast.LENGTH_SHORT);
         alertaAniadidoExito=Toast.makeText(this,"Tortilla añadida con exito", Toast.LENGTH_SHORT);
         saludo = (TextView) findViewById(R.id.Saludo);
+
+
 
         //Todo lo necesario para el popup
         layoutVentana = (LinearLayout) findViewById(R.id.layoutTortillas);
@@ -330,6 +333,13 @@ public class EligeTortilla extends AppCompatActivity {
 
             }
         });
+
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        //Ocultar Teclado
+        InputMethodManager ocultarTeclado = (InputMethodManager)getSystemService(EligeTortilla.this.INPUT_METHOD_SERVICE);
+        ocultarTeclado.hideSoftInputFromWindow(cantidadTortilla.getWindowToken(), 0);
+
+
     }
     public void Saludar(){
         String nombre;

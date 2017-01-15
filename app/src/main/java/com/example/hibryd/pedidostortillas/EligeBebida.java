@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -52,8 +53,7 @@ public class EligeBebida extends AppCompatActivity{
         Bundle bnd = getIntent().getExtras();
         arrayParametros = (ArrayList<Datos>) bnd.getSerializable("array");
 
-        InputMethodManager imm = (InputMethodManager) getSystemService(EligeBebida.this.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+
 
         //Enlazamos los objetos a las vistas
         botonSiguinte = (Button) findViewById(R.id.btnSiguiente3);
@@ -302,6 +302,8 @@ public class EligeBebida extends AppCompatActivity{
                 }
 
         });
+
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
     private void RecalcularPrecioTotal(){

@@ -1,9 +1,11 @@
 package com.example.hibryd.pedidostortillas;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -66,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
                     alertaTelefono.show();
                 }
                 else{
+                    //Ocultar Teclado
+                    InputMethodManager ocultarTeclado = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    ocultarTeclado.hideSoftInputFromWindow(telefono.getWindowToken(), 0);
                LanzarActividad();
                 }
             }
@@ -94,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
 
         //Pasamos por parametro el array List, esto lo podemos hacer porque todas las clases que componen el ArrayList Implementan Serializable
         intent.putExtra("array",arrayParametros);
+
+
 
         //Lanzamos la siguiente actividad
         startActivity(intent);
