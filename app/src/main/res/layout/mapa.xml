@@ -7,64 +7,79 @@
     android:layout_height="match_parent"
     >
 
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:text="@string/Tortillaka47"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:id="@+id/textView"
-            android:textSize="25sp"
-            android:textAlignment="center"/>
-
-        <fragment
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginTop="10dp"
-            tools:context=".FirstMapActivity" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_height="85dp">
-
-        <Button
-            android:text="@string/btnSalir"
-            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/btnSalirInicio"
-            android:layout_weight="1"
-            style="@style/Widget.AppCompat.Button.Colored"/>
+            android:orientation="vertical">
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnLlamar"
-            android:src="@drawable/telefono"
-            android:layout_centerHorizontal="true"
-            android:adjustViewBounds="true"
-            android:cropToPadding="false"
-            android:layout_below="@+id/hlTopBar"
-            android:background="#00000000"
-            android:scaleType="fitXY" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <Button
-            android:text="@string/btnInicio"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/btnInicio"
-            android:layout_weight="0.25"
-            style="@style/Widget.AppCompat.Button.Colored"/>
-    </LinearLayout>
+                <TextView
+                    android:text="@string/Tortillaka47"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/textView"
+                    android:textSize="25sp"
+                    android:textAlignment="center"/>
+
+                <fragment
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginTop="10dp"
+                    tools:context=".FirstMapActivity" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_height="85dp">
+
+                <Button
+                    android:text="@string/btnSalir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/btnSalirInicio"
+                    android:layout_weight="1"
+                    style="@style/Widget.AppCompat.Button.Colored"/>
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnLlamar"
+                    android:src="@drawable/telefono"
+                    android:layout_centerHorizontal="true"
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="false"
+                    android:layout_below="@+id/hlTopBar"
+                    android:background="#00000000"
+                    android:scaleType="fitXY" />
+
+                <Button
+                    android:text="@string/btnInicio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/btnInicio"
+                    android:layout_weight="0.25"
+                    style="@style/Widget.AppCompat.Button.Colored"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
 
 
 </LinearLayout>
