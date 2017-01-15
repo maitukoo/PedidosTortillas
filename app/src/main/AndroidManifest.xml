@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:largeHeap="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FirstMapActivity" android:configChanges="orientation|screenSize">
+        <activity android:name=".FirstMapActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
