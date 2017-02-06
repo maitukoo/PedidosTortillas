@@ -4,6 +4,9 @@ package com.example.hibryd.pedidostortillas;
  * Created by adminportatil on 13/01/2017.
  */
 
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatActivity;
 
 
@@ -33,9 +36,16 @@ public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCal
     private ImageButton llamar;
     private Button salir;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(null);
+        CreacionTablas creartablas =
+                new CreacionTablas(this, "DBUsuarios", null, 1);
+
+        SQLiteDatabase db = creartablas.getWritableDatabase();
+
         setContentView(R.layout.mapa);
 
         //Para Finalizar el programa desde la llamada del Resumen
