@@ -8,10 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class CreacionTablas extends SQLiteOpenHelper {
 
     //Sentencia SQL para crear la tabla de Usuarios
-    String tablaCliente = "CREATE TABLE cliente (clienteID INTEGER, nombre TEXT, direccion TEXT, telefono INTEGER)";
-    String ventaCabecera = "CREATE TABLE ventaCabecera (cabeceraID INTEGER, clienteID INTEGER, fechaPedido DATE)";
-    String ventaLinea = "CREATE TABLE ventaLinea (ventaLineaID INTEGER, productoID INTEGER, cantidad INTEGER, precioUnitario REAL)";
-    String producto = "CREATE TABLE producto (productoID INTEGER, nombre TEXT, tipoHuevo TEXT, tamanio TEXT, precioUnitario REAL)";
+    String tablaCliente = "CREATE TABLE cliente (clienteID INTEGER PRIMARY KEY ASC, nombre TEXT, direccion TEXT, telefono INTEGER) constraints ";
+    String ventaCabecera = "CREATE TABLE ventaCabecera (cabeceraID INTEGER PRIMARY KEY ASC, clienteID INTEGER, fechaPedido DATE)";
+    String ventaLinea = "CREATE TABLE ventaLinea (ventaLineaID INTEGER PRIMARY KEY ASC, productoID INTEGER, cantidad INTEGER, precioUnitario REAL)";
+    String producto = "CREATE TABLE producto (productoID INTEGER PRIMARY KEY ASC, nombre TEXT, tipoHuevo TEXT, tamanio TEXT, precioUnitario REAL)";
 
 
     public CreacionTablas(Context contexto, String nombre,

@@ -28,6 +28,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
         import com.google.android.gms.maps.model.LatLng;
         import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
 
 public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -35,6 +37,9 @@ public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCal
     private Button inicio;
     private ImageButton llamar;
     private Button salir;
+    private ArrayList<Datos> arrayParametros = new ArrayList<Datos>();
+    private Datos datos;
+    SQLiteDatabase db;
 
 
 
@@ -44,7 +49,7 @@ public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCal
         CreacionTablas creartablas =
                 new CreacionTablas(this, "DBUsuarios", null, 1);
 
-        SQLiteDatabase db = creartablas.getWritableDatabase();
+        db = creartablas.getWritableDatabase();
 
         setContentView(R.layout.mapa);
 
@@ -110,6 +115,15 @@ public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCal
 
     public void lanzarInicio(View view) {
         Intent inicio = new Intent(this, MainActivity.class);
+
+        //Les asignamos los valores correspondientes a los objetos y añadimos al ArrayList
+        datos = new Datos();
+        datos.setIdentificador("baseDatos");
+        datos.setX(db);
+        arrayParametros.add(datos);
+
+        //Pasamos por parametro el array List, esto lo podemos hacer porque todas las clases que componen el ArrayList Implementan Serializable
+        inicio.putExtra("array",arrayParametros);
         startActivity(inicio);
     }
 
@@ -126,6 +140,7 @@ public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCal
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+
         startActivity(llamada);
     }
 }

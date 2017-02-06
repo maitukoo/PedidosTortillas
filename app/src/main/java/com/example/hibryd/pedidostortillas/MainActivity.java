@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private Button siguiente;
     private Button atras;
+    private Button buscar;
     private ArrayList<Datos> arrayParametros = new ArrayList<Datos>();
     private EditText nombre;
     private EditText direccion;
@@ -38,11 +39,21 @@ public class MainActivity extends AppCompatActivity {
         telefono = (EditText) findViewById(R.id.edtTelefono);
         siguiente = (Button) findViewById(R.id.SiguienteDatos);
         atras=(Button) findViewById(R.id.btnAtras1);
+        buscar = (Button) findViewById(R.id.botonBuscar);
 
         //Toast para mostrar los mensajes en caso de que no introduzca algun valor.
         alertaNombre = Toast.makeText(this,"Introduce el nombre",Toast.LENGTH_SHORT);
         alertaDireccion = Toast.makeText(this,"Introduce la direccion",Toast.LENGTH_SHORT);
         alertaTelefono=Toast.makeText(this,"Introduce el numero de telefono",Toast.LENGTH_SHORT);
+
+        //programamos el boton de buscar cliente
+
+        buscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buscarCliente();
+            }
+        });
 
         //Programamos el boton salir
         atras.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +115,16 @@ public class MainActivity extends AppCompatActivity {
 
         //Lanzamos la siguiente actividad
         startActivity(intent);
+    }
+
+    public void buscarCliente(){
+        if(nombre.getText().toString().equals("")){
+            alertaNombre.show();
+        } else {
+            String nombreS = nombre.getText().toString();
+            String sql = "SELECT * from cliente where nombre =" + nombreS;
+        }
+
     }
 
     public void onResume(){
