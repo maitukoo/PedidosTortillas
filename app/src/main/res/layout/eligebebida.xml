@@ -33,123 +33,17 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <CheckBox
-                        android:text="Refresco de cola 1,50€"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/ckbCola"
-                        android:textSize="16sp"
-                        android:layout_weight="1" />
-
-                    <CheckBox
-                        android:text="Refresco de limon 1,50€"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/ckbLimon"
-                        android:textSize="16sp"
-                        android:layout_weight="1" />
-
-                    <CheckBox
-                        android:text="Refresco de naranja 1,50€"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/ckbNaranja"
-                        android:textSize="16sp"
-                        android:layout_weight="1" />
-
-                    <CheckBox
-                        android:text="Nestea 2€"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/ckbNestea"
-                        android:textSize="16sp"
-                        android:layout_weight="1" />
-
-                    <CheckBox
-                        android:text="Cerveza 2€"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/ckbCerveza"
-                        android:textSize="16sp"
-                        android:layout_weight="1" />
-
-                    <CheckBox
-                        android:text="Agua 1€"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/ckbAgua"
-                        android:textSize="16sp"
-                        android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:id="@+id/contenedorcheck">
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_weight="1.5"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:inputType="number"
-                        android:id="@+id/txtCantidadCola"
-                        android:hint="@string/EspecificarCantidad"
-                        android:textSize="12sp"
-                        android:layout_weight="1"
-                        android:elevation="0dp" />
-
-                    <EditText
-                        android:layout_height="match_parent"
-                        android:inputType="number"
-                        android:ems="10"
-                        android:id="@+id/txtCantidadLimon"
-                        android:layout_width="wrap_content"
-                        android:hint="@string/EspecificarCantidad"
-                        android:textSize="12sp"
-                        android:layout_weight="1" />
-
-                    <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:inputType="number"
-                        android:ems="10"
-                        android:id="@+id/txtCantidadnaranja"
-                        android:hint="@string/EspecificarCantidad"
-                        android:textSize="12sp"
-                        android:layout_weight="1" />
-
-                    <EditText
-                        android:layout_height="match_parent"
-                        android:inputType="number"
-                        android:ems="10"
-                        android:id="@+id/txtCantidadNestea"
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
-                        android:hint="@string/EspecificarCantidad"
-                        android:textSize="12sp"/>
-
-                    <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:inputType="number"
-                        android:ems="10"
-                        android:id="@+id/txtCantidadCerveza"
-                        android:hint="@string/EspecificarCantidad"
-                        android:textSize="12sp"
-                        android:layout_weight="1" />
-
-                    <EditText
-                        android:layout_height="match_parent"
-                        android:inputType="number"
-                        android:ems="10"
-                        android:id="@+id/txtCantidadAgua"
-                        android:layout_width="wrap_content"
-                        android:hint="@string/EspecificarCantidad"
-                        android:textSize="12sp"
-                        android:layout_weight="1" />
+                    android:layout_weight="4"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/contenedoredit">
 
                 </LinearLayout>
 
@@ -201,7 +95,6 @@
 
         </LinearLayout>
     </ScrollView>
-
 
 
 </LinearLayout>

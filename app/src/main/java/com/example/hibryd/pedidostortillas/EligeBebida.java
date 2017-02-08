@@ -1,6 +1,9 @@
 package com.example.hibryd.pedidostortillas;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,6 +17,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -33,19 +37,10 @@ public class EligeBebida extends AppCompatActivity{
     private Button botonAtras;
     private double precioTotalBebidas = 0;
     private TextView precioTotal;
-    private CheckBox checkCola;
-    private CheckBox checkLimon;
-    private CheckBox checkNaranja;
-    private CheckBox checkNestea;
-    private CheckBox checkCerveza;
-    private CheckBox checkAgua;
-    private EditText cantidadCola;
-    private EditText cantidadLimon;
-    private EditText cantidadNaranja;
-    private EditText cantidadNestea;
-    private EditText cantidadCerveza;
-    private EditText cantidadAgua;
     private ArrayList<Datos> arrayParametros = new ArrayList<Datos>();
+    private LinearLayout contenedorcheck;
+    private LinearLayout contenedoredit;
+    SQLiteDatabase db;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,11 +48,43 @@ public class EligeBebida extends AppCompatActivity{
         Bundle bnd = getIntent().getExtras();
         arrayParametros = (ArrayList<Datos>) bnd.getSerializable("array");
 
+        CreacionTablas creartablas =
+                new CreacionTablas(this, "DBUsuarios", null, 7);
+        db = creartablas.getReadableDatabase();
+
+        Cursor cr = db.rawQuery("Select * FROM producto",null);
 
 
         //Enlazamos los objetos a las vistas
         botonSiguinte = (Button) findViewById(R.id.btnSiguiente3);
-        checkCola = (CheckBox) findViewById(R.id.ckbCola);
+        contenedorcheck = (LinearLayout) findViewById(R.id.contenedorcheck);
+        contenedoredit = (LinearLayout) findViewById(R.id.contenedoredit);
+
+
+
+        ArrayList<CrearVistasDinamicas> vistas = new ArrayList<CrearVistasDinamicas>();
+        while (cr.moveToNext()){
+            vistas.add(new CrearVistasDinamicas(cr.getInt(0),cr.getString(1)));
+        }
+
+
+
+        for (CrearVistasDinamicas c:vistas){
+            CheckBox cb = new CheckBox(getApplicationContext());
+            EditText edt = new EditText(getApplicationContext());
+            cb.setText(c.getNombre());
+            cb.setId(c.getId());
+            cb.setTextColor(Color.BLACK);
+            edt.setId(c.getId());
+            edt.setTextColor(Color.BLACK);
+            edt.setHint("Cantidad");
+            edt.setHintTextColor(Color.BLACK);
+            edt.setTextSize(8);
+            contenedorcheck.addView(cb);
+            contenedoredit.addView(edt);
+        }
+
+        /*checkCola = (CheckBox) findViewById(R.id.ckbCola);
         checkLimon = (CheckBox) findViewById(R.id.ckbLimon);
         checkNaranja = (CheckBox) findViewById(R.id.ckbNaranja);
         checkNestea = (CheckBox) findViewById(R.id.ckbNestea);
@@ -303,7 +330,7 @@ public class EligeBebida extends AppCompatActivity{
 
         });
 
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);*/
     }
 
     private void RecalcularPrecioTotal(){
@@ -352,6 +379,34 @@ public class EligeBebida extends AppCompatActivity{
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         //Lanzamos la siguiente actividad
         startActivity(intent);
+    }
+
+    class CrearVistasDinamicas{
+        private int id;
+        private String nombre;
+
+        public CrearVistasDinamicas(int id, String nombre) {
+            this.id = id;
+            this.nombre = nombre;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getNombre() {
+            return nombre;
+        }
+
+        public void setNombre(String nombre) {
+            this.nombre = nombre;
+        }
+
+
     }
 
 }

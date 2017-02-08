@@ -47,9 +47,10 @@ public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCal
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(null);
         CreacionTablas creartablas =
-                new CreacionTablas(this, "DBUsuarios", null, 1);
+                new CreacionTablas(this, "DBUsuarios", null, 7);
 
         db = creartablas.getWritableDatabase();
+        db.execSQL("INSERT INTO producto (productoid,nombre,preciounitario) VALUES(1,'cola-cola',1.5)");
 
         setContentView(R.layout.mapa);
 
@@ -117,13 +118,10 @@ public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCal
         Intent inicio = new Intent(this, MainActivity.class);
 
         //Les asignamos los valores correspondientes a los objetos y añadimos al ArrayList
-        datos = new Datos();
-        datos.setIdentificador("baseDatos");
-        datos.setX(db);
-        arrayParametros.add(datos);
+
 
         //Pasamos por parametro el array List, esto lo podemos hacer porque todas las clases que componen el ArrayList Implementan Serializable
-        inicio.putExtra("array",arrayParametros);
+
         startActivity(inicio);
     }
 
