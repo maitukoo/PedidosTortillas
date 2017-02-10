@@ -67,11 +67,9 @@ public class EligeBebida extends AppCompatActivity{
             vistas.add(new CrearVistasDinamicas(cr.getInt(0),cr.getString(1)));
         }
 
-
-
         for (CrearVistasDinamicas c:vistas){
-            CheckBox cb = new CheckBox(getApplicationContext());
-            EditText edt = new EditText(getApplicationContext());
+            final CheckBox cb = new CheckBox(getApplicationContext());
+            final EditText edt = new EditText(getApplicationContext());
             cb.setText(c.getNombre());
             cb.setId(c.getId());
             cb.setTextColor(Color.BLACK);
@@ -82,22 +80,27 @@ public class EligeBebida extends AppCompatActivity{
             edt.setTextSize(8);
             contenedorcheck.addView(cb);
             contenedoredit.addView(edt);
+            cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (cb.isChecked()) {
+                        edt.setEnabled(true);
+                        //Ponemos el foco en la caja de texto para escribir la cantidad
+                        edt.requestFocus();
+                        InputMethodManager imm = (InputMethodManager) getSystemService(EligeBebida.this.INPUT_METHOD_SERVICE);
+                        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+                    } else {
+                        cantidades[0] = 0;
+                        edt.setText("");
+                        edt.setEnabled(false);
+                        RecalcularPrecioTotal();
+                    }
+                }
+            });
+
         }
 
-        /*checkCola = (CheckBox) findViewById(R.id.ckbCola);
-        checkLimon = (CheckBox) findViewById(R.id.ckbLimon);
-        checkNaranja = (CheckBox) findViewById(R.id.ckbNaranja);
-        checkNestea = (CheckBox) findViewById(R.id.ckbNestea);
-        checkCerveza = (CheckBox) findViewById(R.id.ckbCerveza);
-        checkAgua = (CheckBox) findViewById(R.id.ckbAgua);
-        cantidadCola = (EditText) findViewById(R.id.txtCantidadCola);
-        cantidadLimon = (EditText) findViewById(R.id.txtCantidadLimon);
-        cantidadNaranja = (EditText) findViewById(R.id.txtCantidadnaranja);
-        cantidadNestea = (EditText) findViewById(R.id.txtCantidadNestea);
-        cantidadCerveza = (EditText) findViewById(R.id.txtCantidadCerveza);
-        cantidadAgua = (EditText) findViewById(R.id.txtCantidadAgua);
-        precioTotal=(TextView)findViewById(R.id.lblPrecioTotal);
-        botonAtras=(Button) findViewById(R.id.btnAtras3);
+        /*
 
         //Los ponemos en disabled para que no pueda meter ningun valor hasta que selecione alguna bebida.
         cantidadCola.setEnabled(false);

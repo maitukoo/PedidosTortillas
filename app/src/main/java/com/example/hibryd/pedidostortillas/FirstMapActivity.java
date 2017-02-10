@@ -37,8 +37,6 @@ public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCal
     private Button inicio;
     private ImageButton llamar;
     private Button salir;
-    private ArrayList<Datos> arrayParametros = new ArrayList<Datos>();
-    private Datos datos;
     SQLiteDatabase db;
 
 
@@ -50,7 +48,7 @@ public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCal
                 new CreacionTablas(this, "DBUsuarios", null, 7);
 
         db = creartablas.getWritableDatabase();
-        db.execSQL("INSERT INTO producto (productoid,nombre,preciounitario) VALUES(1,'cola-cola',1.5)");
+        //db.execSQL("INSERT INTO producto (productoid,nombre,preciounitario) VALUES(1,'cola-cola',1.5)");
 
         setContentView(R.layout.mapa);
 
