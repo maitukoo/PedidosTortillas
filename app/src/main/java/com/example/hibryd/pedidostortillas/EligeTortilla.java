@@ -3,6 +3,8 @@ package com.example.hibryd.pedidostortillas;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +27,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 /**
@@ -32,13 +37,12 @@ import java.util.ArrayList;
 
 public class EligeTortilla extends AppCompatActivity {
 
-    private double precios[]={6,6,8,10,10,9};
-    String[] nombre = {"Patata 6€","Verduras 6€","Bacalao 8€","Jamon Iberico 10€","Queso Idiazabal 10€", "Hongos 9€"};
-    Integer[] imageId = {R.drawable.tpatata,R.drawable.tverdura,R.drawable.tbacalao,R.drawable.tjamon,R.drawable.tpatata,R.drawable.thongos};
+    ArrayList<String> nombre = new ArrayList<String>();//{"Patata 6€","Verduras 6€","Bacalao 8€","Jamon Iberico 10€","Queso Idiazabal 10€", "Hongos 9€"};
+    ArrayList<String> imageId =new ArrayList<String>(); //{R.drawable.tpatata,R.drawable.tverdura,R.drawable.tbacalao,R.drawable.tjamon,R.drawable.tpatata,R.drawable.thongos};
     private ArrayList<Datos> arrayParametros;
     private Cliente cliente;
     private Datos datos;
-    private double precioTotalTortillas;
+    private TextView precioTotal;
     private Tortilla tortilla;
     private Button aniadir;
     private TextView saludo;
@@ -57,14 +61,21 @@ public class EligeTortilla extends AppCompatActivity {
     private Toast alertaSiguiente;
     private Toast alertaAniadidoExito;
     private int cont;
+    private SQLiteDatabase db;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.eligetortilla);
 
+        CreacionTablas creartablas =
+                new CreacionTablas(this, "DBUsuarios", null, 13);
+        db = creartablas.getReadableDatabase();
+
+        cargarArrays();
 
 
+        precioTotal=(TextView) findViewById(R.id.precioTotalTortillas);
         atras=(Button) findViewById(R.id.btnAtrasTortilla);
         aniadir=(Button) findViewById(R.id.btnAniadirTortilla);
         cantidadTortilla = (EditText) findViewById(R.id.txtcantidadTortilla);
@@ -114,7 +125,14 @@ public class EligeTortilla extends AppCompatActivity {
         comboTipoHuevo.setAdapter(adaptadorTipoHuevo);
 
         spinnerTortillas = (Spinner) findViewById(R.id.cmbTipoTortilla);
-        AdaptadorTortillas adapter = new AdaptadorTortillas(this,nombre,imageId);
+
+        Integer [] imagenes=new Integer[imageId.size()];
+        String [] nombreS=new String[nombre.size()];
+        for(int i = 0; i < imageId.size(); i++){
+            imagenes [i] = getResources().getIdentifier(imageId.get(i),"drawable",getPackageName());
+            nombreS [i]= nombre.get(i);
+        }
+        AdaptadorTortillas adapter = new AdaptadorTortillas(this,nombreS,imagenes);
         spinnerTortillas.setAdapter(adapter);
 
         container.setOnTouchListener(new View.OnTouchListener() {
@@ -139,6 +157,42 @@ public class EligeTortilla extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ventana.dismiss();
+            }
+        });
+
+        comboTamanio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                calcularPrecio(db);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        comboTipoHuevo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                calcularPrecio(db);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinnerTortillas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                calcularPrecio(db);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
@@ -398,6 +452,26 @@ public class EligeTortilla extends AppCompatActivity {
         }
         return precioTortilla;
 
+    }
+
+    public void calcularPrecio(SQLiteDatabase db){
+        String [] tamaniotortilla = comboTamanio.getSelectedItem().toString().split(" ");
+        String [] tipoHuevotortilla = comboTipoHuevo.getSelectedItem().toString().split(" ");
+        Cursor c=db.rawQuery("SELECT precioUnitario from producto where UPPER(nombre)='" + spinnerTortillas.getSelectedItem().toString().toUpperCase() +
+                "' and UPPER(tipoHuevo)='" + tipoHuevotortilla[0].toUpperCase() + "' and UPPER(tamanio)='" +
+                tamaniotortilla[0].toUpperCase() + "'",null);
+        while(c.moveToNext()){
+            precioTotal.setText("Precio total: "+c.getInt(0)+ "€");
+        }
+
+    }
+
+    public void cargarArrays(){
+       Cursor c= db.rawQuery("SELECT distinct(nombre),imagen from producto where tipoHuevo is not null",null);
+        while(c.moveToNext()){
+            nombre.add(c.getString(0));
+            imageId.add(c.getString(1));
+        }
     }
 
 

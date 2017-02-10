@@ -41,6 +41,8 @@ public class EligeBebida extends AppCompatActivity{
     private LinearLayout contenedorcheck;
     private LinearLayout contenedoredit;
     SQLiteDatabase db;
+    int cont =0;
+    int numeroBebidas=0;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,13 +51,14 @@ public class EligeBebida extends AppCompatActivity{
         arrayParametros = (ArrayList<Datos>) bnd.getSerializable("array");
 
         CreacionTablas creartablas =
-                new CreacionTablas(this, "DBUsuarios", null, 9);
+                new CreacionTablas(this, "DBUsuarios", null, 13);
         db = creartablas.getReadableDatabase();
 
-        Cursor cr = db.rawQuery("Select * FROM producto",null);
+        Cursor cr = db.rawQuery("Select * FROM producto where tipoHuevo is null",null);
 
 
         //Enlazamos los objetos a las vistas
+        botonAtras = (Button) findViewById(R.id.btnAtras3);
         botonSiguinte = (Button) findViewById(R.id.btnSiguiente3);
         contenedorcheck = (LinearLayout) findViewById(R.id.contenedorcheck);
         contenedoredit = (LinearLayout) findViewById(R.id.contenedoredit);
@@ -65,38 +68,51 @@ public class EligeBebida extends AppCompatActivity{
         ArrayList<CrearVistasDinamicas> vistas = new ArrayList<CrearVistasDinamicas>();
         while (cr.moveToNext()){
             vistas.add(new CrearVistasDinamicas(cr.getInt(0),cr.getString(1)));
+            precios[numeroBebidas] = cr.getFloat(4);
+            numeroBebidas++;
+
         }
 
+
         for (CrearVistasDinamicas c:vistas){
-            final CheckBox cb = new CheckBox(getApplicationContext());
-            final EditText edt = new EditText(getApplicationContext());
-            cb.setText(c.getNombre());
-            cb.setId(c.getId());
-            cb.setTextColor(Color.BLACK);
-            edt.setId(c.getId());
-            edt.setTextColor(Color.BLACK);
-            edt.setHint("Cantidad");
-            edt.setHintTextColor(Color.BLACK);
-            edt.setTextSize(8);
-            contenedorcheck.addView(cb);
-            contenedoredit.addView(edt);
-            cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (cb.isChecked()) {
-                        edt.setEnabled(true);
-                        //Ponemos el foco en la caja de texto para escribir la cantidad
-                        edt.requestFocus();
-                        InputMethodManager imm = (InputMethodManager) getSystemService(EligeBebida.this.INPUT_METHOD_SERVICE);
-                        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-                    } else {
-                        cantidades[0] = 0;
-                        edt.setText("");
-                        edt.setEnabled(false);
-                        RecalcularPrecioTotal();
+                final CheckBox cb = new CheckBox(getApplicationContext());
+                final EditText edt = new EditText(getApplicationContext());
+                cb.setText(c.getNombre());
+                cb.setId(c.getId());
+                cb.setTextColor(Color.BLACK);
+                edt.setId(c.getId());
+                edt.setTextColor(Color.BLACK);
+                edt.setHint("Cantidad");
+                edt.setHintTextColor(Color.BLACK);
+                edt.setTextSize(8);
+                contenedorcheck.addView(cb);
+                contenedoredit.addView(edt);
+                cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (cb.isChecked()) {
+                            edt.setEnabled(true);
+                            //Ponemos el foco en la caja de texto para escribir la cantidad
+                            edt.requestFocus();
+                            InputMethodManager imm = (InputMethodManager) getSystemService(EligeBebida.this.INPUT_METHOD_SERVICE);
+                            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+                        } else {
+                            cantidades[cont] = 0;
+                            cont++;
+                            edt.setText("");
+                            edt.setEnabled(false);
+                            RecalcularPrecioTotal(cb);
+                        }
                     }
-                }
-            });
+                });
+                edt.setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+                        cantidades[cont] = Integer.parseInt(edt.getText().toString());
+                        RecalcularPrecioTotal(v);
+                        return false;
+                    }
+                });
 
         }
 
@@ -109,7 +125,7 @@ public class EligeBebida extends AppCompatActivity{
         cantidadNestea.setEnabled(false);
         cantidadCerveza.setEnabled(false);
         cantidadAgua.setEnabled(false);
-
+           */
 
         botonSiguinte.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,7 +149,7 @@ public class EligeBebida extends AppCompatActivity{
         });
 
 
-
+        /*
         //Ponemos los listeners para todos los checkBox para que cuando esten checkeados sea posible
         //cambiar el valor de la canitdad.
         checkCola.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -336,9 +352,10 @@ public class EligeBebida extends AppCompatActivity{
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);*/
     }
 
-    private void RecalcularPrecioTotal(){
+    private void RecalcularPrecioTotal(View v){
         precioTotalBebidas=0;
-        for (int i=0;i<=5;i++){
+
+        for (int i=0;i<=numeroBebidas;i++){
             precioTotalBebidas+= cantidades[i] * precios[i];
         }
         precioTotal.setText(Double.toString(precioTotalBebidas));

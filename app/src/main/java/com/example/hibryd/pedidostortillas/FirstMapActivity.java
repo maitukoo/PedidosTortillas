@@ -50,7 +50,7 @@ public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCal
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(null);
         CreacionTablas creartablas =
-                new CreacionTablas(this, "DBUsuarios", null, 9);
+                new CreacionTablas(this, "DBUsuarios", null, 13);
 
 
         db = creartablas.getWritableDatabase();
@@ -120,6 +120,7 @@ public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCal
     }
 
     public void lanzarInicio(View view) {
+        db.close();
         Intent inicio = new Intent(this, MainActivity.class);
 
         //Les asignamos los valores correspondientes a los objetos y añadimos al ArrayList

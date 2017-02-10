@@ -19,7 +19,7 @@
     <string name="Importe">Importe</string>
 
     <string-array name="Tamanios">
-        <item>Individual</item>
+        <item>Individual </item>
         <item>Familiar +5€</item>
     </string-array>
 
@@ -48,4 +48,5 @@
     <string name="compraFinalizada">¡Se ha finalizado la compra con exito!</string>
     <string name="seEstaFinalizando">Se esta finalizando el pedido...</string>
     <string name="BuscarCliente">Buscar</string>
+    <string name="Limpiar">Limpiar</string>
 </resources>
