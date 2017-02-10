@@ -6,6 +6,7 @@ package com.example.hibryd.pedidostortillas;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Environment;
 import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatActivity;
 
@@ -28,6 +29,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
         import com.google.android.gms.maps.model.LatLng;
         import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 
 
@@ -45,11 +50,10 @@ public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCal
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(null);
         CreacionTablas creartablas =
-                new CreacionTablas(this, "DBUsuarios", null, 8);
+                new CreacionTablas(this, "DBUsuarios", null, 9);
 
 
         db = creartablas.getWritableDatabase();
-        db.execSQL("INSERT INTO producto (productoid,nombre,preciounitario) VALUES(1,'cola-cola',1.5)");
 
         setContentView(R.layout.mapa);
 
@@ -82,7 +86,9 @@ public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCal
         inicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                copiarDB();
                 lanzarInicio(null);
+
             }
         });
 
@@ -139,5 +145,32 @@ public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCal
         }
 
         startActivity(llamada);
+    }
+
+    public void copiarDB(){
+        try {
+            File sd = Environment.getExternalStorageDirectory();
+            File data = Environment.getDataDirectory();
+            if (sd.canWrite()) {
+                String currentDBPath = "/data/data/"+"com.example.hibryd.pedidostortillas"+"/databases/"+"DBUsuarios";
+                String backupDBPath = "/"+"DBUsuarios"; //"{database name}";
+                File dir = new File(sd,backupDBPath.replace("DBUsuarios",""));
+                if(dir.mkdir()) {
+
+                }
+                File currentDB = new File(data, currentDBPath);
+                File backupDB = new File(sd, backupDBPath);
+                if (currentDB.exists()) {
+                    FileChannel src = new FileInputStream(currentDB).getChannel();
+                    FileChannel dst = new FileOutputStream(backupDB).getChannel();
+                    dst.transferFrom(src, 0, src.size());
+                    src.close();
+                    dst.close();
+                }
+            }
+
+        } catch (Exception e) {
+
+        }
     }
 }

@@ -49,7 +49,7 @@ public class EligeBebida extends AppCompatActivity{
         arrayParametros = (ArrayList<Datos>) bnd.getSerializable("array");
 
         CreacionTablas creartablas =
-                new CreacionTablas(this, "DBUsuarios", null, 8);
+                new CreacionTablas(this, "DBUsuarios", null, 9);
         db = creartablas.getReadableDatabase();
 
         Cursor cr = db.rawQuery("Select * FROM producto",null);
