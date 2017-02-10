@@ -45,10 +45,11 @@ public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCal
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(null);
         CreacionTablas creartablas =
-                new CreacionTablas(this, "DBUsuarios", null, 7);
+                new CreacionTablas(this, "DBUsuarios", null, 8);
+
 
         db = creartablas.getWritableDatabase();
-        //db.execSQL("INSERT INTO producto (productoid,nombre,preciounitario) VALUES(1,'cola-cola',1.5)");
+        db.execSQL("INSERT INTO producto (productoid,nombre,preciounitario) VALUES(1,'cola-cola',1.5)");
 
         setContentView(R.layout.mapa);
 
