@@ -28,7 +28,7 @@ import java.util.ArrayList;
  */
 
 public class EligeBebida extends AppCompatActivity{
-    private double precios[]={1.50,1.50,1.50,2,2,1};
+    private ArrayList<String> precios = new ArrayList<String>();
     private double cantidades[]={0,0,0,0,0,0};
     private String nombreBebidas[] = {"Cola","Limon","Naranja","Nestea","Cerveza","Agua"};
     private Bebida bebida;
@@ -51,13 +51,14 @@ public class EligeBebida extends AppCompatActivity{
         arrayParametros = (ArrayList<Datos>) bnd.getSerializable("array");
 
         CreacionTablas creartablas =
-                new CreacionTablas(this, "DBUsuarios", null, 13);
+                new CreacionTablas(this, "DBUsuarios", null, 14);
         db = creartablas.getReadableDatabase();
 
         Cursor cr = db.rawQuery("Select * FROM producto where tipoHuevo is null",null);
 
 
         //Enlazamos los objetos a las vistas
+        precioTotal= (TextView) findViewById(R.id.lblPrecioTotal);
         botonAtras = (Button) findViewById(R.id.btnAtras3);
         botonSiguinte = (Button) findViewById(R.id.btnSiguiente3);
         contenedorcheck = (LinearLayout) findViewById(R.id.contenedorcheck);
@@ -68,7 +69,7 @@ public class EligeBebida extends AppCompatActivity{
         ArrayList<CrearVistasDinamicas> vistas = new ArrayList<CrearVistasDinamicas>();
         while (cr.moveToNext()){
             vistas.add(new CrearVistasDinamicas(cr.getInt(0),cr.getString(1)));
-            precios[numeroBebidas] = cr.getFloat(4);
+            precios.add(Float.toString(cr.getFloat(4)));
             numeroBebidas++;
 
         }
@@ -85,6 +86,7 @@ public class EligeBebida extends AppCompatActivity{
                 edt.setHint("Cantidad");
                 edt.setHintTextColor(Color.BLACK);
                 edt.setTextSize(8);
+                edt.setEnabled(false);
                 contenedorcheck.addView(cb);
                 contenedoredit.addView(edt);
                 cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -97,8 +99,7 @@ public class EligeBebida extends AppCompatActivity{
                             InputMethodManager imm = (InputMethodManager) getSystemService(EligeBebida.this.INPUT_METHOD_SERVICE);
                             imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                         } else {
-                            cantidades[cont] = 0;
-                            cont++;
+                            cantidades[buttonView.getId()-1] = 0;
                             edt.setText("");
                             edt.setEnabled(false);
                             RecalcularPrecioTotal(cb);
@@ -108,8 +109,10 @@ public class EligeBebida extends AppCompatActivity{
                 edt.setOnKeyListener(new View.OnKeyListener() {
                     @Override
                     public boolean onKey(View v, int keyCode, KeyEvent event) {
-                        cantidades[cont] = Integer.parseInt(edt.getText().toString());
-                        RecalcularPrecioTotal(v);
+                        if(!edt.getText().toString().equals("")) {
+                            cantidades[v.getId() - 1] = Double.parseDouble(edt.getText().toString());
+                            RecalcularPrecioTotal(v);
+                        }
                         return false;
                     }
                 });
@@ -355,8 +358,8 @@ public class EligeBebida extends AppCompatActivity{
     private void RecalcularPrecioTotal(View v){
         precioTotalBebidas=0;
 
-        for (int i=0;i<=numeroBebidas;i++){
-            precioTotalBebidas+= cantidades[i] * precios[i];
+        for (int i=0;i<=numeroBebidas -1;i++){
+            precioTotalBebidas+= cantidades[i] * Double.parseDouble(precios.get(i));
         }
         precioTotal.setText(Double.toString(precioTotalBebidas));
     }
@@ -372,7 +375,7 @@ public class EligeBebida extends AppCompatActivity{
                 bebida = new Bebida();
                 //Les asignamos los valores correspondientes a los objetos y añadimos al ArrayList
                 bebida.setNumeroBebidas(cantidades[i]);
-                bebida.setPrecioUnitario(precios[i]);
+                bebida.setPrecioUnitario(Double.parseDouble(precios.get(i)));
                 bebida.setTipoBebida(nombreBebidas[i]);
                 datos.setIdentificador("bebida");
                 datos.setX(bebida);

@@ -69,7 +69,7 @@ public class EligeTortilla extends AppCompatActivity {
         setContentView(R.layout.eligetortilla);
 
         CreacionTablas creartablas =
-                new CreacionTablas(this, "DBUsuarios", null, 13);
+                new CreacionTablas(this, "DBUsuarios", null, 14);
         db = creartablas.getReadableDatabase();
 
         cargarArrays();

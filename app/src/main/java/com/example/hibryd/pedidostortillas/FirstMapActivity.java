@@ -48,9 +48,10 @@ public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCal
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Le ponemos parametro null porque sino hay un bug de google maps que al girar crashea la app.
         super.onCreate(null);
         CreacionTablas creartablas =
-                new CreacionTablas(this, "DBUsuarios", null, 13);
+                new CreacionTablas(this, "DBUsuarios", null, 14);
 
 
         db = creartablas.getWritableDatabase();
