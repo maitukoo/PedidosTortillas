@@ -55,6 +55,8 @@ public class Login extends AppCompatActivity {
         }
     }
 
+    
+
     public void comprobarDatosDB (String usuario, String contrasenia){
 
         Cursor cr = db.rawQuery("Select * FROM usuario where usuario ='" + usuario + "' AND contrasenia ='" + contrasenia + "'",null);

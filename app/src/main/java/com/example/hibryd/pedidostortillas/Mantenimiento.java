@@ -28,7 +28,7 @@ public class Mantenimiento extends AppCompatActivity {
         setContentView(R.layout.mantenimiento_articulos);
 
         CreacionTablas creartablas =
-                new CreacionTablas(this, "DBUsuarios", null, 20);
+                new CreacionTablas(this, "DBUsuarios", null, 22);
         db = creartablas.getReadableDatabase();
 
         articuloID = (EditText) findViewById(R.id.edtIdArticulo);
@@ -70,7 +70,7 @@ public class Mantenimiento extends AppCompatActivity {
     public void comprobarInsertar(){
 
         CreacionTablas creartablas =
-                new CreacionTablas(this, "DBUsuarios", null, 20);
+                new CreacionTablas(this, "DBUsuarios", null, 22);
         db = creartablas.getWritableDatabase();
 
         int siguienteArticulo = Integer.valueOf(articuloID.getText().toString()) + 1;

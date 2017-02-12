@@ -140,7 +140,7 @@ public class Resumen extends AppCompatActivity {
                     int linea= 1;
                     c.moveToNext();
                     cur.moveToNext();
-                    db.execSQL("INSERT INTO ventaCabecera (cabeceraID,clienteID,fechaPedido) VALUES(" + (c.getInt(0)+1) + "," + cur.getInt(0)+ "," + new SimpleDateFormat("dd/MM/yyyy").format(new Date()) +")");
+                    db.execSQL("INSERT INTO ventaCabecera (cabeceraID,clienteID,fechaPedido) VALUES(" + (c.getInt(0)+1) + "," + cur.getInt(0)+ ",datetime())");
                     for(int i=0;i<arrayParametros.size();i++){
                         datos = arrayParametros.get(i);
                         Log.e("info",datos.getIdentificador());
