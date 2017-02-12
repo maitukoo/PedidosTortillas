@@ -36,6 +36,7 @@ public class Mantenimiento extends AppCompatActivity {
         precioArticulo = (EditText) findViewById(R.id.edtPrecioNuevo);
         insertar = (Button) findViewById(R.id.btnInsertar);
         spinnerTipo = (Spinner) findViewById(R.id.spinnerTipo);
+        articuloID.setEnabled(false);
 
         Cursor cr = db.rawQuery("SELECT max(productoID) FROM producto",null);
         if (cr.moveToNext()){

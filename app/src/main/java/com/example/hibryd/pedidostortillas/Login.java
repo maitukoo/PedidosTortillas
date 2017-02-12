@@ -61,6 +61,8 @@ public class Login extends AppCompatActivity {
 
         if (cr.moveToNext()){
             LanzarActividad();
+        } else {
+            Toast.makeText(this,"Usuario y contraseña incorrectos",Toast.LENGTH_LONG).show();
         }
     }
 
