@@ -3,6 +3,8 @@ package com.example.hibryd.pedidostortillas;
 import android.app.ActionBar;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -31,7 +33,9 @@ import com.google.android.gms.vision.text.Line;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by adminportatil on 11/01/2017.
@@ -58,12 +62,17 @@ public class Resumen extends AppCompatActivity {
     private int posicionSeleccionada;
     private double precioTotalPedido;
     private TextView regalo;
-
-
+    private String vengode="";
+    private SQLiteDatabase db;
+    private Cliente cliente;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resumen);
+
+        CreacionTablas creartablas =
+                new CreacionTablas(this, "DBUsuarios", null, 22);
+        db = creartablas.getReadableDatabase();
 
         Toast avisoborrar =
                 Toast.makeText(getApplicationContext(),
@@ -89,6 +98,9 @@ public class Resumen extends AppCompatActivity {
         //Recogida de datos del arraylist
         Bundle bnd = getIntent().getExtras();
         arrayParametros = (ArrayList<Datos>) bnd.getSerializable("array");
+        if (bnd.size() == 2) {
+            vengode = bnd.getString("ventanaTortilla");
+        }
 
 
         //Apuntadores a los listview y precio total
@@ -122,13 +134,43 @@ public class Resumen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (arrayParametros.size()>1) {
+                    cliente = (Cliente)arrayParametros.get(0).getX();
+                    Cursor c = db.rawQuery("SELECT MAX(cabeceraID) from ventaCabecera",null);
+                    Cursor cur = db.rawQuery("SELECT clienteID from cliente where UPPER(nombre)='" + cliente.getNombre().toString().toUpperCase() + "'",null);
+                    int linea= 1;
+                    c.moveToNext();
+                    cur.moveToNext();
+                    db.execSQL("INSERT INTO ventaCabecera (cabeceraID,clienteID,fechaPedido) VALUES(" + (c.getInt(0)+1) + "," + cur.getInt(0)+ "," + new SimpleDateFormat("dd/MM/yyyy").format(new Date()) +")");
+                    for(int i=0;i<arrayParametros.size();i++){
+                        datos = arrayParametros.get(i);
+                        Log.e("info",datos.getIdentificador());
+                        switch (datos.getIdentificador()){
+                            case "tortilla":
+                                tortilla =(Tortilla) datos.getX();
+                                Cursor curs = db.rawQuery("SELECT * from producto WHERE UPPER(nombre)='"+ tortilla.getTipoTortilla().toUpperCase() +"'",null);
+                                curs.moveToNext();
+                                db.execSQL("INSERT INTO ventaLinea (ventaLineaID,cabeceraID,productoID,cantidad,precioUnitario) VALUES("+ linea + "," + (c.getInt(0)+1) + "," +
+                                        curs.getString(0) + "," + tortilla.getCantidad() + "," + tortilla.getPrecioUnitario()+")");
+                                linea++;
+                                break;
+                            case "bebida":
+                                bebida =(Bebida) datos.getX();
+                                Cursor curss = db.rawQuery("SELECT * from producto WHERE UPPER(nombre)='"+ bebida.getTipoBebida().toUpperCase() + "'",null);
+                                curss.moveToNext();
+                                db.execSQL("INSERT INTO ventaLinea (ventaLineaID,cabeceraID,productoID,cantidad,precioUnitario) VALUES("+ linea + "," + (c.getInt(0)+1) + "," +
+                                        curss.getString(0) + "," + bebida.getNumeroBebidas() + "," + bebida.getPrecioUnitario()+")");
+                                linea++;
+                                break;
+                        }
+                    }
                     AlertDialog alert11 = builder1.create();
                     alert11.show();
-                }
+
+                    }
+
                 else{
                     Toast.makeText(Resumen.this, "No puedes realizar un pedido vacio!", Toast.LENGTH_SHORT).show();
                 }
-
 
             }
         });
@@ -164,14 +206,25 @@ public class Resumen extends AppCompatActivity {
         atrasResumen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Resumen.this,EligeBebida.class);
+                if(vengode.equals("ventanaTortilla")) {
+                    Intent intent = new Intent(Resumen.this, EligeTortilla.class);
 
-                //Pasamos por parametro el array List, esto lo podemos hacer porque todas las clases que componen el ArrayList Implementan Serializable
-                intent.putExtra("array",arrayParametros);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                //Lanzamos la siguiente actividad
-                startActivity(intent);
-                finish();
+                    //Pasamos por parametro el array List, esto lo podemos hacer porque todas las clases que componen el ArrayList Implementan Serializable
+                    intent.putExtra("array", arrayParametros);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    //Lanzamos la siguiente actividad
+                    startActivity(intent);
+                    finish();
+                }else {
+                    Intent intent = new Intent(Resumen.this, EligeBebida.class);
+
+                    //Pasamos por parametro el array List, esto lo podemos hacer porque todas las clases que componen el ArrayList Implementan Serializable
+                    intent.putExtra("array", arrayParametros);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    //Lanzamos la siguiente actividad
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
@@ -248,14 +301,26 @@ public class Resumen extends AppCompatActivity {
 
     public void onBackPressed(){
         super.onBackPressed();
-        Intent intent = new Intent(Resumen.this,EligeBebida.class);
+        if(vengode.equals("ventanaTortilla")) {
+            Intent intent = new Intent(Resumen.this, EligeTortilla.class);
 
-        //Pasamos por parametro el array List, esto lo podemos hacer porque todas las clases que componen el ArrayList Implementan Serializable
-        intent.putExtra("array",arrayParametros);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        //Lanzamos la siguiente actividad
-        startActivity(intent);
-        finish();
+            //Pasamos por parametro el array List, esto lo podemos hacer porque todas las clases que componen el ArrayList Implementan Serializable
+            intent.putExtra("array", arrayParametros);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            //Lanzamos la siguiente actividad
+            startActivity(intent);
+            finish();
+        }
+        else{
+            Intent intent = new Intent(Resumen.this, EligeBebida.class);
+
+            //Pasamos por parametro el array List, esto lo podemos hacer porque todas las clases que componen el ArrayList Implementan Serializable
+            intent.putExtra("array", arrayParametros);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            //Lanzamos la siguiente actividad
+            startActivity(intent);
+            finish();
+        }
     }
 
     public void comprobarRegalo(){

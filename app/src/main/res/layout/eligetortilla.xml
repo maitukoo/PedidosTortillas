@@ -137,6 +137,8 @@
 
             </LinearLayout>
 
+
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -151,6 +153,19 @@
                     android:id="@+id/btnAtrasTortilla"
                     android:layout_weight="1"
                     style="@style/Widget.AppCompat.Button.Colored"/>
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnCarrito"
+                    android:src="@drawable/rsz__carrito"
+                    android:layout_centerHorizontal="true"
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="false"
+                    android:layout_below="@+id/btnAniadirTortilla"
+                    android:background="#00000000"
+                    android:scaleType="fitXY" />
+
 
                 <Button
                     android:text="@string/Siguiente"

@@ -26,7 +26,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.login);
 
         CreacionTablas creartablas =
-                new CreacionTablas(this, "DBUsuarios", null, 19);
+                new CreacionTablas(this, "DBUsuarios", null, 22);
         db = creartablas.getReadableDatabase();
 
         usuario = (EditText) findViewById(R.id.edtUsuario);

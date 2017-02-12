@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -29,8 +30,8 @@ import java.util.ArrayList;
 
 public class EligeBebida extends AppCompatActivity{
     private ArrayList<String> precios = new ArrayList<String>();
-    private double cantidades[]={0,0,0,0,0,0};
-    private String nombreBebidas[] = {"Cola","Limon","Naranja","Nestea","Cerveza","Agua"};
+    private double cantidades[];
+    private ArrayList<String> nombreBebidas = new ArrayList<String>();
     private Bebida bebida;
     private Datos datos;
     private Button botonSiguinte;
@@ -41,7 +42,7 @@ public class EligeBebida extends AppCompatActivity{
     private LinearLayout contenedorcheck;
     private LinearLayout contenedoredit;
     SQLiteDatabase db;
-    int cont =0;
+    int id =1;
     int numeroBebidas=0;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,40 +52,45 @@ public class EligeBebida extends AppCompatActivity{
         arrayParametros = (ArrayList<Datos>) bnd.getSerializable("array");
 
         CreacionTablas creartablas =
-                new CreacionTablas(this, "DBUsuarios", null, 19);
+                new CreacionTablas(this, "DBUsuarios", null, 22);
         db = creartablas.getReadableDatabase();
 
-        Cursor cr = db.rawQuery("Select * FROM producto where tipoHuevo is null", null);
+        Cursor cr = db.rawQuery("Select * FROM producto where tipoHuevo is null",null);
 
 
         //Enlazamos los objetos a las vistas
-        precioTotal = (TextView) findViewById(R.id.lblPrecioTotal);
+        precioTotal= (TextView) findViewById(R.id.lblPrecioTotal);
         botonAtras = (Button) findViewById(R.id.btnAtras3);
         botonSiguinte = (Button) findViewById(R.id.btnSiguiente3);
         contenedorcheck = (LinearLayout) findViewById(R.id.contenedorcheck);
         contenedoredit = (LinearLayout) findViewById(R.id.contenedoredit);
 
 
+
         ArrayList<CrearVistasDinamicas> vistas = new ArrayList<CrearVistasDinamicas>();
-        while (cr.moveToNext()) {
-            vistas.add(new CrearVistasDinamicas(cr.getInt(0), cr.getString(1)));
+        while (cr.moveToNext()){
+            vistas.add(new CrearVistasDinamicas(id,cr.getString(1)));
+            nombreBebidas.add(cr.getString(1));
+            id++;
             precios.add(Float.toString(cr.getFloat(4)));
             numeroBebidas++;
 
         }
+        cantidades = new double[numeroBebidas];
 
 
-        for (CrearVistasDinamicas c : vistas) {
+        for (CrearVistasDinamicas c:vistas){
             final CheckBox cb = new CheckBox(getApplicationContext());
             final EditText edt = new EditText(getApplicationContext());
             cb.setText(c.getNombre());
-            cb.setId(c.getId());
+            cb.setId(c.id);
             cb.setTextColor(Color.BLACK);
-            edt.setId(c.getId());
+            edt.setId(c.id);
             edt.setTextColor(Color.BLACK);
             edt.setHint("Cantidad");
             edt.setHintTextColor(Color.BLACK);
             edt.setTextSize(8);
+            edt.setRawInputType(InputType.TYPE_CLASS_NUMBER);
             edt.setEnabled(false);
             contenedorcheck.addView(cb);
             contenedoredit.addView(edt);
@@ -98,7 +104,7 @@ public class EligeBebida extends AppCompatActivity{
                         InputMethodManager imm = (InputMethodManager) getSystemService(EligeBebida.this.INPUT_METHOD_SERVICE);
                         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                     } else {
-                        cantidades[buttonView.getId() - 1] = 0;
+                        cantidades[buttonView.getId()-1] = 0;
                         edt.setText("");
                         edt.setEnabled(false);
                         RecalcularPrecioTotal(cb);
@@ -108,7 +114,7 @@ public class EligeBebida extends AppCompatActivity{
             edt.setOnKeyListener(new View.OnKeyListener() {
                 @Override
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
-                    if (!edt.getText().toString().equals("")) {
+                    if(!edt.getText().toString().equals("")) {
                         cantidades[v.getId() - 1] = Double.parseDouble(edt.getText().toString());
                         RecalcularPrecioTotal(v);
                     }
@@ -116,11 +122,9 @@ public class EligeBebida extends AppCompatActivity{
                 }
             });
 
-
-            //camasjdjasjhdhjasdhjasd
+        }
 
         /*
-
         //Los ponemos en disabled para que no pueda meter ningun valor hasta que selecione alguna bebida.
         cantidadCola.setEnabled(false);
         cantidadLimon.setEnabled(false);
@@ -130,26 +134,26 @@ public class EligeBebida extends AppCompatActivity{
         cantidadAgua.setEnabled(false);
            */
 
-            botonSiguinte.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    LanzarActividad();
-                }
-            });
+        botonSiguinte.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LanzarActividad();
+            }
+        });
 
-            botonAtras.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(EligeBebida.this, EligeTortilla.class);
+        botonAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EligeBebida.this,EligeTortilla.class);
 
-                    //Pasamos por parametro el array List, esto lo podemos hacer porque todas las clases que componen el ArrayList Implementan Serializable
-                    intent.putExtra("array", arrayParametros);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                    //Lanzamos la siguiente actividad
-                    startActivity(intent);
-                    finish();
-                }
-            });
+                //Pasamos por parametro el array List, esto lo podemos hacer porque todas las clases que componen el ArrayList Implementan Serializable
+                intent.putExtra("array",arrayParametros);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                //Lanzamos la siguiente actividad
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
         /*
@@ -189,7 +193,6 @@ public class EligeBebida extends AppCompatActivity{
                 }
             }
         });
-
         checkNaranja.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -207,7 +210,6 @@ public class EligeBebida extends AppCompatActivity{
                 }
             }
         });
-
         checkNestea.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -225,7 +227,6 @@ public class EligeBebida extends AppCompatActivity{
                 }
             }
         });
-
         checkCerveza.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -260,9 +261,7 @@ public class EligeBebida extends AppCompatActivity{
                     }
             }
         });
-
         //Listeners para que cuando introduzca la cantidad de bebida deseada se actualice su precio Total
-
         cantidadCola.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -276,11 +275,9 @@ public class EligeBebida extends AppCompatActivity{
                 return false;
             }
         });
-
         cantidadLimon.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-
                     if (!cantidadLimon.getText().toString().equals("")) {
                         cantidades[1] = Double.parseDouble(cantidadLimon.getText().toString());
                         RecalcularPrecioTotal();
@@ -291,7 +288,6 @@ public class EligeBebida extends AppCompatActivity{
                     return false;
                 }
         });
-
         cantidadNaranja.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -305,8 +301,6 @@ public class EligeBebida extends AppCompatActivity{
                     return false;
             }
         });
-
-
         cantidadNestea.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -318,10 +312,8 @@ public class EligeBebida extends AppCompatActivity{
                         RecalcularPrecioTotal();
                     }
                     return false;
-
             }
         });
-
         cantidadCerveza.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -333,10 +325,8 @@ public class EligeBebida extends AppCompatActivity{
                         RecalcularPrecioTotal();
                     }
                     return false;
-
             }
         });
-
         cantidadAgua.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -349,11 +339,8 @@ public class EligeBebida extends AppCompatActivity{
                     }
                     return false;
                 }
-
         });
-
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);*/
-        }
     }
 
     private void RecalcularPrecioTotal(View v){
@@ -370,14 +357,14 @@ public class EligeBebida extends AppCompatActivity{
 
 
         //Instaciamos los objetos que vamos a meter en el arrayList para pasarlo por parametro
-        for (int i=0;i<=5; i++) {
+        for (int i=0;i<numeroBebidas; i++) {
             if (cantidades[i] != 0){
                 datos = new Datos();
                 bebida = new Bebida();
                 //Les asignamos los valores correspondientes a los objetos y añadimos al ArrayList
                 bebida.setNumeroBebidas(cantidades[i]);
                 bebida.setPrecioUnitario(Double.parseDouble(precios.get(i)));
-                bebida.setTipoBebida(nombreBebidas[i]);
+                bebida.setTipoBebida(nombreBebidas.get(i));
                 datos.setIdentificador("bebida");
                 datos.setX(bebida);
                 arrayParametros.add(datos);

@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.Image;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -19,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -42,6 +45,7 @@ public class EligeTortilla extends AppCompatActivity {
     private ArrayList<Datos> arrayParametros;
     private Cliente cliente;
     private Datos datos;
+    private ImageButton carrito;
     private TextView precioTotal;
     private Tortilla tortilla;
     private Button aniadir;
@@ -69,12 +73,15 @@ public class EligeTortilla extends AppCompatActivity {
         setContentView(R.layout.eligetortilla);
 
         CreacionTablas creartablas =
-                new CreacionTablas(this, "DBUsuarios", null, 19);
+                new CreacionTablas(this, "DBUsuarios", null, 22);
         db = creartablas.getReadableDatabase();
 
+
+        //Carga los nombres y las imagenes en los arraylist.
         cargarArrays();
 
 
+        carrito = (ImageButton) findViewById(R.id.btnCarrito);
         precioTotal=(TextView) findViewById(R.id.precioTotalTortillas);
         atras=(Button) findViewById(R.id.btnAtrasTortilla);
         aniadir=(Button) findViewById(R.id.btnAniadirTortilla);
@@ -113,6 +120,7 @@ public class EligeTortilla extends AppCompatActivity {
                 return false;
             }
         });
+
 
         comboTamanio = (Spinner) findViewById(R.id.cmbTamanio);
         ArrayAdapter<CharSequence> adaptadorTamanio = ArrayAdapter.createFromResource(this,R.array.Tamanios,android.R.layout.simple_spinner_item);
@@ -157,6 +165,13 @@ public class EligeTortilla extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ventana.dismiss();
+            }
+        });
+
+        carrito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               cargarCarrito();
             }
         });
 
@@ -475,6 +490,21 @@ public class EligeTortilla extends AppCompatActivity {
         }
     }
 
+    public void cargarCarrito(){
+        if (arrayParametros.size()>1) {
+            Intent in = new Intent(EligeTortilla.this, Resumen.class);
+
+            Bundle extras = new Bundle();
+            extras.putSerializable("array",arrayParametros);
+            extras.putString("ventanaTortilla","ventanaTortilla");
+            in.putExtras(extras);
+
+            startActivity(in);
+            finish();
+        }else{
+            Toast.makeText(this, "Antes de ir al carrito tienes que añadir una tortilla.", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     //En caso de que presione el boton de atras del movil tenemos que borrar el arraylist.
     //Si muestro en la pantalla la alerta directamente la cierra y no da tiempo alegir la opcion

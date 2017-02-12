@@ -6,16 +6,18 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CreacionTablas extends SQLiteOpenHelper implements Serializable {
 
     //Sentencia SQL para crear la tabla de Usuarios
     String tablaCliente = "CREATE TABLE cliente (clienteID INTEGER PRIMARY KEY, nombre TEXT, direccion TEXT, telefono TEXT)";
-    String ventaCabecera = "CREATE TABLE ventaCabecera (cabeceraID INTEGER PRIMARY KEY, clienteID INTEGER, fechaPedido DATE, FOREIGN KEY (clienteID) REFERENCES cliente (clienteID) ON DELETE CASCADE)";
-    String ventaLinea = "CREATE TABLE ventaLinea (ventaLineaID INTEGER PRIMARY KEY,cabeceraID INTEGER, " +
+    String ventaCabecera = "CREATE TABLE ventaCabecera (cabeceraID INTEGER PRIMARY KEY, clienteID INTEGER, fechaPedido DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (clienteID) REFERENCES cliente (clienteID) ON DELETE CASCADE)";
+    String ventaLinea = "CREATE TABLE ventaLinea (ventaLineaID INTEGER,cabeceraID INTEGER, " +
             "productoID INTEGER, cantidad INTEGER, precioUnitario REAL, FOREIGN KEY (cabeceraID) REFERENCES ventaCabecera (cabeceraID) ON DELETE CASCADE," +
-            "FOREIGN KEY (productoID) REFERENCES producto (productoID) ON DELETE CASCADE)";
+            "FOREIGN KEY (productoID) REFERENCES producto (productoID) ON DELETE CASCADE, PRIMARY KEY (ventaLineaID, cabeceraID))";
     String producto = "CREATE TABLE producto (productoID INTEGER PRIMARY KEY, nombre TEXT, tipoHuevo TEXT, tamanio TEXT, precioUnitario REAL, imagen TEXT)";
     String usuario = "CREATE TABLE usuario (usuario TEXT PRIMARY KEY, contrasenia TEXT)";
 
@@ -70,6 +72,8 @@ public class CreacionTablas extends SQLiteOpenHelper implements Serializable {
     String insertarTortilla35 = "INSERT INTO producto (productoID,nombre,tipoHuevo,tamanio,precioUnitario,imagen) VALUES (41,'Thongos','Campero','Familiar',16,'thongos')";
     String insertarTortilla36 = "INSERT INTO producto (productoID,nombre,tipoHuevo,tamanio,precioUnitario,imagen) VALUES (42,'Thongos','Ecologico','Familiar',17,'thongos')";
 
+    String insertarCabecera= "INSERT INTO ventaCabecera (cabeceraID,clienteID,fechaPedido) VALUES(1,1," + new SimpleDateFormat("dd/MM/yyyy").format(new Date()) + ")";
+    String insertarLinea= "INSERT INTO ventaLinea (ventaLineaID,productoID,cantidad,precioUnitario) VALUES(1,1,3,6)";
 
     String insertarCliente = "INSERT INTO cliente (clienteID,nombre,direccion,telefono) VALUES (1,'Mikel','Latxumbe-berri 25 4-A',650560079)";
     String insertarCliente2 = "INSERT INTO cliente (clienteID,nombre,direccion,telefono) VALUES (2,'Oscar','Donostia xdddmemes',666666666)";
@@ -157,6 +161,8 @@ public class CreacionTablas extends SQLiteOpenHelper implements Serializable {
         db.execSQL(insertarTortilla34);
         db.execSQL(insertarTortilla35);
         db.execSQL(insertarTortilla36);
+        db.execSQL(insertarCabecera);
+        db.execSQL(insertarLinea);
 
 
         //Se crea la nueva versión de la tabla
