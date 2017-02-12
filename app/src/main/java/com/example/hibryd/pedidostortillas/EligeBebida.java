@@ -54,70 +54,70 @@ public class EligeBebida extends AppCompatActivity{
                 new CreacionTablas(this, "DBUsuarios", null, 14);
         db = creartablas.getReadableDatabase();
 
-        Cursor cr = db.rawQuery("Select * FROM producto where tipoHuevo is null",null);
+        Cursor cr = db.rawQuery("Select * FROM producto where tipoHuevo is null", null);
 
 
         //Enlazamos los objetos a las vistas
-        precioTotal= (TextView) findViewById(R.id.lblPrecioTotal);
+        precioTotal = (TextView) findViewById(R.id.lblPrecioTotal);
         botonAtras = (Button) findViewById(R.id.btnAtras3);
         botonSiguinte = (Button) findViewById(R.id.btnSiguiente3);
         contenedorcheck = (LinearLayout) findViewById(R.id.contenedorcheck);
         contenedoredit = (LinearLayout) findViewById(R.id.contenedoredit);
 
 
-
         ArrayList<CrearVistasDinamicas> vistas = new ArrayList<CrearVistasDinamicas>();
-        while (cr.moveToNext()){
-            vistas.add(new CrearVistasDinamicas(cr.getInt(0),cr.getString(1)));
+        while (cr.moveToNext()) {
+            vistas.add(new CrearVistasDinamicas(cr.getInt(0), cr.getString(1)));
             precios.add(Float.toString(cr.getFloat(4)));
             numeroBebidas++;
 
         }
 
 
-        for (CrearVistasDinamicas c:vistas){
-                final CheckBox cb = new CheckBox(getApplicationContext());
-                final EditText edt = new EditText(getApplicationContext());
-                cb.setText(c.getNombre());
-                cb.setId(c.getId());
-                cb.setTextColor(Color.BLACK);
-                edt.setId(c.getId());
-                edt.setTextColor(Color.BLACK);
-                edt.setHint("Cantidad");
-                edt.setHintTextColor(Color.BLACK);
-                edt.setTextSize(8);
-                edt.setEnabled(false);
-                contenedorcheck.addView(cb);
-                contenedoredit.addView(edt);
-                cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (cb.isChecked()) {
-                            edt.setEnabled(true);
-                            //Ponemos el foco en la caja de texto para escribir la cantidad
-                            edt.requestFocus();
-                            InputMethodManager imm = (InputMethodManager) getSystemService(EligeBebida.this.INPUT_METHOD_SERVICE);
-                            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-                        } else {
-                            cantidades[buttonView.getId()-1] = 0;
-                            edt.setText("");
-                            edt.setEnabled(false);
-                            RecalcularPrecioTotal(cb);
-                        }
+        for (CrearVistasDinamicas c : vistas) {
+            final CheckBox cb = new CheckBox(getApplicationContext());
+            final EditText edt = new EditText(getApplicationContext());
+            cb.setText(c.getNombre());
+            cb.setId(c.getId());
+            cb.setTextColor(Color.BLACK);
+            edt.setId(c.getId());
+            edt.setTextColor(Color.BLACK);
+            edt.setHint("Cantidad");
+            edt.setHintTextColor(Color.BLACK);
+            edt.setTextSize(8);
+            edt.setEnabled(false);
+            contenedorcheck.addView(cb);
+            contenedoredit.addView(edt);
+            cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (cb.isChecked()) {
+                        edt.setEnabled(true);
+                        //Ponemos el foco en la caja de texto para escribir la cantidad
+                        edt.requestFocus();
+                        InputMethodManager imm = (InputMethodManager) getSystemService(EligeBebida.this.INPUT_METHOD_SERVICE);
+                        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+                    } else {
+                        cantidades[buttonView.getId() - 1] = 0;
+                        edt.setText("");
+                        edt.setEnabled(false);
+                        RecalcularPrecioTotal(cb);
                     }
-                });
-                edt.setOnKeyListener(new View.OnKeyListener() {
-                    @Override
-                    public boolean onKey(View v, int keyCode, KeyEvent event) {
-                        if(!edt.getText().toString().equals("")) {
-                            cantidades[v.getId() - 1] = Double.parseDouble(edt.getText().toString());
-                            RecalcularPrecioTotal(v);
-                        }
-                        return false;
+                }
+            });
+            edt.setOnKeyListener(new View.OnKeyListener() {
+                @Override
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+                    if (!edt.getText().toString().equals("")) {
+                        cantidades[v.getId() - 1] = Double.parseDouble(edt.getText().toString());
+                        RecalcularPrecioTotal(v);
                     }
-                });
+                    return false;
+                }
+            });
 
-        }
+
+            //camasjdjasjhdhjasdhjasd
 
         /*
 
@@ -130,26 +130,26 @@ public class EligeBebida extends AppCompatActivity{
         cantidadAgua.setEnabled(false);
            */
 
-        botonSiguinte.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LanzarActividad();
-            }
-        });
+            botonSiguinte.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    LanzarActividad();
+                }
+            });
 
-        botonAtras.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(EligeBebida.this,EligeTortilla.class);
+            botonAtras.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(EligeBebida.this, EligeTortilla.class);
 
-                //Pasamos por parametro el array List, esto lo podemos hacer porque todas las clases que componen el ArrayList Implementan Serializable
-                intent.putExtra("array",arrayParametros);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                //Lanzamos la siguiente actividad
-                startActivity(intent);
-                finish();
-            }
-        });
+                    //Pasamos por parametro el array List, esto lo podemos hacer porque todas las clases que componen el ArrayList Implementan Serializable
+                    intent.putExtra("array", arrayParametros);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    //Lanzamos la siguiente actividad
+                    startActivity(intent);
+                    finish();
+                }
+            });
 
 
         /*
@@ -353,6 +353,7 @@ public class EligeBebida extends AppCompatActivity{
         });
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);*/
+        }
     }
 
     private void RecalcularPrecioTotal(View v){
