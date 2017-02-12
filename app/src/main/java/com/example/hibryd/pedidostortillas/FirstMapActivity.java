@@ -42,6 +42,7 @@ public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCal
     private Button inicio;
     private ImageButton llamar;
     private Button salir;
+    private Button admin;
     SQLiteDatabase db;
 
 
@@ -51,7 +52,7 @@ public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCal
         //Le ponemos parametro null porque sino hay un bug de google maps que al girar crashea la app.
         super.onCreate(null);
         CreacionTablas creartablas =
-                new CreacionTablas(this, "DBUsuarios", null, 14);
+                new CreacionTablas(this, "DBUsuarios", null, 19);
 
 
         db = creartablas.getWritableDatabase();
@@ -66,6 +67,14 @@ public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCal
         inicio = (Button) findViewById(R.id.btnInicio);
         llamar = (ImageButton) findViewById(R.id.btnLlamar);
         salir = (Button) findViewById(R.id.btnSalirInicio);
+        admin = (Button) findViewById(R.id.btnAdmin);
+
+        admin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                lanzarLogin();
+            }
+        });
 
         salir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,6 +140,15 @@ public class FirstMapActivity extends AppCompatActivity implements OnMapReadyCal
 
         startActivity(inicio);
     }
+
+    public void lanzarLogin(){
+            db.close();
+            Intent inicio = new Intent(this, Login.class);
+
+
+            startActivity(inicio);
+        }
+
 
     //La llamada
     public void realizarLlamada(View view) {

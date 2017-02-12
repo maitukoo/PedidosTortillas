@@ -51,7 +51,7 @@ public class EligeBebida extends AppCompatActivity{
         arrayParametros = (ArrayList<Datos>) bnd.getSerializable("array");
 
         CreacionTablas creartablas =
-                new CreacionTablas(this, "DBUsuarios", null, 14);
+                new CreacionTablas(this, "DBUsuarios", null, 19);
         db = creartablas.getReadableDatabase();
 
         Cursor cr = db.rawQuery("Select * FROM producto where tipoHuevo is null", null);

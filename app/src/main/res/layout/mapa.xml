@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -20,6 +21,15 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+
+                <Button
+                    android:text="@string/admin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnAdmin"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_gravity="right" />
 
                 <TextView
                     android:text="@string/Tortillaka47"
@@ -73,10 +83,12 @@
                     android:id="@+id/btnInicio"
                     android:layout_weight="0.25"
                     style="@style/Widget.AppCompat.Button.Colored"/>
+
             </LinearLayout>
 
 
         </LinearLayout>
+
     </ScrollView>
 
 

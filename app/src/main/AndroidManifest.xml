@@ -24,6 +24,8 @@
         <activity android:name=".EligeBebida"/>
         <activity android:name=".Resumen"/>
         <activity android:name=".MainActivity"/>
+        <activity android:name=".Login"/>
+        <activity android:name=".Mantenimiento"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBlP5uDX2JBVPS4ekQnJ9hi5oHm09aRYfY"/>

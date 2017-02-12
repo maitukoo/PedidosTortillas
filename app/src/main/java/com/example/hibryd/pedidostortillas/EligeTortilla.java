@@ -69,7 +69,7 @@ public class EligeTortilla extends AppCompatActivity {
         setContentView(R.layout.eligetortilla);
 
         CreacionTablas creartablas =
-                new CreacionTablas(this, "DBUsuarios", null, 14);
+                new CreacionTablas(this, "DBUsuarios", null, 19);
         db = creartablas.getReadableDatabase();
 
         cargarArrays();
@@ -206,7 +206,7 @@ public class EligeTortilla extends AppCompatActivity {
                     alertaCantidad.show();
                 }
                 else {
-                    //Recogemos los datos de los Text Box
+                   /* //Recogemos los datos de los Text Box
                     tortillaElegida = spinnerTortillas.getSelectedItemPosition();
                     String tipoTortilla = "";
                     switch (tortillaElegida){
@@ -332,8 +332,9 @@ public class EligeTortilla extends AppCompatActivity {
                                 tipoTortilla = "T.Hongos +fam +eco";
                             }
                             break;
-                    }
+                    }*/
 
+                    String tipoTortilla = spinnerTortillas.getSelectedItem().toString();
                     String tamanioS = comboTamanio.getSelectedItem().toString();
                     String huevoS = comboTipoHuevo.getSelectedItem().toString();
                     int cantidadS = Integer.parseInt(cantidadTortilla.getText().toString());

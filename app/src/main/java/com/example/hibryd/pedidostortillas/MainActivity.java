@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         CreacionTablas creartablas =
-                new CreacionTablas(this, "DBUsuarios", null, 14);
+                new CreacionTablas(this, "DBUsuarios", null, 19);
 
 
         db = creartablas.getWritableDatabase();

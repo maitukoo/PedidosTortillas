@@ -17,6 +17,9 @@ public class CreacionTablas extends SQLiteOpenHelper implements Serializable {
             "productoID INTEGER, cantidad INTEGER, precioUnitario REAL, FOREIGN KEY (cabeceraID) REFERENCES ventaCabecera (cabeceraID) ON DELETE CASCADE," +
             "FOREIGN KEY (productoID) REFERENCES producto (productoID) ON DELETE CASCADE)";
     String producto = "CREATE TABLE producto (productoID INTEGER PRIMARY KEY, nombre TEXT, tipoHuevo TEXT, tamanio TEXT, precioUnitario REAL, imagen TEXT)";
+    String usuario = "CREATE TABLE usuario (usuario TEXT PRIMARY KEY, contrasenia TEXT)";
+
+    String insertaradmin = "INSERT INTO usuario VALUES('admin','admin')";
 
     String insertarCola = "INSERT INTO producto (productoID,nombre,precioUnitario) VALUES (1,'Coca-cola',1.5)";
     String insertarLimon = "INSERT INTO producto (productoID,nombre,precioUnitario) VALUES (2,'Kas-limon',1.5)";
@@ -85,6 +88,7 @@ public class CreacionTablas extends SQLiteOpenHelper implements Serializable {
         db.execSQL(ventaCabecera);
         db.execSQL(ventaLinea);
         db.execSQL(producto);
+        db.execSQL(usuario);
     }
 
     @Override
@@ -100,10 +104,15 @@ public class CreacionTablas extends SQLiteOpenHelper implements Serializable {
         db.execSQL("DROP TABLE ventaCabecera");
         db.execSQL("DROP TABLE cliente");
         db.execSQL("DROP TABLE producto");
+        db.execSQL("DROP TABLE usuario");
+
         db.execSQL(tablaCliente);
         db.execSQL(ventaCabecera);
         db.execSQL(ventaLinea);
         db.execSQL(producto);
+        db.execSQL(usuario);
+        db.execSQL(insertaradmin);
+
         db.execSQL(insertarCola);
         db.execSQL(insertarLimon);
         db.execSQL(insertarNaranja);

@@ -18,6 +18,11 @@
     <string name="Atras">Atras</string>
     <string name="Importe">Importe</string>
 
+    <string-array name="Tipos">
+        <item>Bebida</item>
+        <item>Tortilla</item>
+    </string-array>
+
     <string-array name="Tamanios">
         <item>Individual </item>
         <item>Familiar +5€</item>
@@ -49,4 +54,12 @@
     <string name="seEstaFinalizando">Se esta finalizando el pedido...</string>
     <string name="BuscarCliente">Buscar</string>
     <string name="Limpiar">Limpiar</string>
+    <string name="Login">Login</string>
+    <string name="Contrasenia">Contraseña</string>
+    <string name="entrar">Entrar</string>
+    <string name="admin">Admin</string>
+    <string name="NuevoProducto">Nuevo Producto</string>
+    <string name="articuloID">ArticuloID</string>
+    <string name="Tipo">Tipo:</string>
+    <string name="insertar">Insertar</string>
 </resources>
