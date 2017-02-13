@@ -65,6 +65,7 @@ public class EligeTortilla extends AppCompatActivity {
     private Toast alertaSiguiente;
     private Toast alertaAniadidoExito;
     private int cont;
+    private Float precioLinea;
     private SQLiteDatabase db;
 
 
@@ -360,7 +361,7 @@ public class EligeTortilla extends AppCompatActivity {
                     datos = new Datos();
 
                     //Les asignamos los valores correspondientes a los objetos y añadimos al ArrayList
-                    tortilla.setPrecioUnitario(CalculaPrecioTortilla());
+                    tortilla.setPrecioUnitario(precioLinea);
                     tortilla.setTamanio(tamanioS);
                     tortilla.setTipoHuevos(huevoS);
                     tortilla.setCantidad(cantidadS);
@@ -477,7 +478,8 @@ public class EligeTortilla extends AppCompatActivity {
                 "' and UPPER(tipoHuevo)='" + tipoHuevotortilla[0].toUpperCase() + "' and UPPER(tamanio)='" +
                 tamaniotortilla[0].toUpperCase() + "'",null);
         while(c.moveToNext()){
-            precioTotal.setText("Precio total: "+c.getInt(0)+ "€");
+            precioTotal.setText("Precio total: "+c.getFloat(0)+ "€");
+            precioLinea = c.getFloat(0);
         }
 
     }

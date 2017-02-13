@@ -267,7 +267,28 @@ public class Resumen extends AppCompatActivity {
             switch (datos.getIdentificador()){
                 case "tortilla":
                     tortilla = (Tortilla) datos.getX();
-                    nombresA.add(tortilla.getTipoTortilla());
+                    String nombreTortillaLinea=tortilla.getTipoTortilla();
+                    String tamaniotort = tortilla.getTamanio();
+                    switch (tortilla.getTamanio()){
+                        case "Familiar +5€":
+                            nombreTortillaLinea +="+Fam";
+                            break;
+                        case "Individual":
+                            nombreTortillaLinea += "+Ind";
+                            break;
+                    }
+                    switch (tortilla.getTipoHuevos()){
+                        case "Granja":
+                            nombreTortillaLinea += "+Gra";
+                            break;
+                        case "Campero +2€":
+                            nombreTortillaLinea += "+Camp";
+                            break;
+                        case "Ecologico +3€":
+                            nombreTortillaLinea += "+Eco";
+                    }
+
+                    nombresA.add(nombreTortillaLinea);
                     cantidadesA.add(String.valueOf(tortilla.getCantidad()));
                     precioTotal = tortilla.getPrecioUnitario() * tortilla.getCantidad();
                     preciosTotalesA.add(String.valueOf(precioTotal)+" €");
